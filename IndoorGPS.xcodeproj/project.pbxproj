@@ -19,6 +19,19 @@
 		CDDAC2DE189F9707002298E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2C6189F9706002298E6 /* UIKit.framework */; };
 		CDDAC2E6189F9707002298E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDDAC2E4189F9707002298E6 /* InfoPlist.strings */; };
 		CDDAC2E8189F9707002298E6 /* IndoorGPSTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDAC2E7189F9707002298E6 /* IndoorGPSTests.m */; };
+		CDDAC2F8189F9725002298E6 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F1189F9725002298E6 /* CoreBluetooth.framework */; };
+		CDDAC2F9189F9725002298E6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F2189F9725002298E6 /* CoreLocation.framework */; };
+		CDDAC2FA189F9725002298E6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F3189F9725002298E6 /* SystemConfiguration.framework */; };
+		CDDAC2FB189F9725002298E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F4189F9725002298E6 /* Foundation.framework */; };
+		CDDAC2FC189F9725002298E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F5189F9725002298E6 /* CoreGraphics.framework */; };
+		CDDAC2FD189F9725002298E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F6189F9725002298E6 /* UIKit.framework */; };
+		CDDAC2FE189F9725002298E6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F7189F9725002298E6 /* XCTest.framework */; };
+		CDDAC305189F9752002298E6 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = CDDAC300189F9752002298E6 /* Documentation.html */; };
+		CDDAC306189F9752002298E6 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDAC302189F9752002298E6 /* GCDAsyncSocket.m */; };
+		CDDAC307189F9752002298E6 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDAC304189F9752002298E6 /* GCDAsyncUdpSocket.m */; };
+		CDDAC30F189F9773002298E6 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC30E189F9773002298E6 /* libEstimoteSDK.a */; };
+		CDDAC314189F9799002298E6 /* IndoorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDAC312189F9799002298E6 /* IndoorViewController.m */; };
+		CDDAC315189F9799002298E6 /* IndoorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDDAC313189F9799002298E6 /* IndoorViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +61,27 @@
 		CDDAC2E3189F9707002298E6 /* IndoorGPSTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "IndoorGPSTests-Info.plist"; sourceTree = "<group>"; };
 		CDDAC2E5189F9707002298E6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		CDDAC2E7189F9707002298E6 /* IndoorGPSTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndoorGPSTests.m; sourceTree = "<group>"; };
+		CDDAC2F1189F9725002298E6 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		CDDAC2F2189F9725002298E6 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CDDAC2F3189F9725002298E6 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		CDDAC2F4189F9725002298E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CDDAC2F5189F9725002298E6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CDDAC2F6189F9725002298E6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CDDAC2F7189F9725002298E6 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CDDAC300189F9752002298E6 /* Documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; name = Documentation.html; path = ../OpenDoor/GCD/Documentation.html; sourceTree = "<group>"; };
+		CDDAC301189F9752002298E6 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncSocket.h; path = ../OpenDoor/GCD/GCDAsyncSocket.h; sourceTree = "<group>"; };
+		CDDAC302189F9752002298E6 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncSocket.m; path = ../OpenDoor/GCD/GCDAsyncSocket.m; sourceTree = "<group>"; };
+		CDDAC303189F9752002298E6 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GCDAsyncUdpSocket.h; path = ../OpenDoor/GCD/GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
+		CDDAC304189F9752002298E6 /* GCDAsyncUdpSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GCDAsyncUdpSocket.m; path = ../OpenDoor/GCD/GCDAsyncUdpSocket.m; sourceTree = "<group>"; };
+		CDDAC309189F9773002298E6 /* ESTBeacon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESTBeacon.h; path = ../OpenDoor/EstimoteSDK/Headers/ESTBeacon.h; sourceTree = "<group>"; };
+		CDDAC30A189F9773002298E6 /* ESTBeaconDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESTBeaconDefinitions.h; path = ../OpenDoor/EstimoteSDK/Headers/ESTBeaconDefinitions.h; sourceTree = "<group>"; };
+		CDDAC30B189F9773002298E6 /* ESTBeaconManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESTBeaconManager.h; path = ../OpenDoor/EstimoteSDK/Headers/ESTBeaconManager.h; sourceTree = "<group>"; };
+		CDDAC30C189F9773002298E6 /* ESTBeaconRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESTBeaconRegion.h; path = ../OpenDoor/EstimoteSDK/Headers/ESTBeaconRegion.h; sourceTree = "<group>"; };
+		CDDAC30D189F9773002298E6 /* ESTBeaconUpdateInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ESTBeaconUpdateInfo.h; path = ../OpenDoor/EstimoteSDK/Headers/ESTBeaconUpdateInfo.h; sourceTree = "<group>"; };
+		CDDAC30E189F9773002298E6 /* libEstimoteSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libEstimoteSDK.a; path = ../OpenDoor/EstimoteSDK/libEstimoteSDK.a; sourceTree = "<group>"; };
+		CDDAC311189F9799002298E6 /* IndoorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorViewController.h; sourceTree = "<group>"; };
+		CDDAC312189F9799002298E6 /* IndoorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndoorViewController.m; sourceTree = "<group>"; };
+		CDDAC313189F9799002298E6 /* IndoorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndoorViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,8 +89,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDDAC30F189F9773002298E6 /* libEstimoteSDK.a in Frameworks */,
 				CDDAC2C5189F9706002298E6 /* CoreGraphics.framework in Frameworks */,
+				CDDAC2FD189F9725002298E6 /* UIKit.framework in Frameworks */,
+				CDDAC2F9189F9725002298E6 /* CoreLocation.framework in Frameworks */,
 				CDDAC2C7189F9706002298E6 /* UIKit.framework in Frameworks */,
+				CDDAC2F8189F9725002298E6 /* CoreBluetooth.framework in Frameworks */,
+				CDDAC2FC189F9725002298E6 /* CoreGraphics.framework in Frameworks */,
+				CDDAC2FA189F9725002298E6 /* SystemConfiguration.framework in Frameworks */,
+				CDDAC2FE189F9725002298E6 /* XCTest.framework in Frameworks */,
+				CDDAC2FB189F9725002298E6 /* Foundation.framework in Frameworks */,
 				CDDAC2C3189F9706002298E6 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,6 +119,9 @@
 		CDDAC2B6189F9706002298E6 = {
 			isa = PBXGroup;
 			children = (
+				CDDAC311189F9799002298E6 /* IndoorViewController.h */,
+				CDDAC312189F9799002298E6 /* IndoorViewController.m */,
+				CDDAC313189F9799002298E6 /* IndoorViewController.xib */,
 				CDDAC2C8189F9706002298E6 /* IndoorGPS */,
 				CDDAC2E1189F9707002298E6 /* IndoorGPSTests */,
 				CDDAC2C1189F9706002298E6 /* Frameworks */,
@@ -96,6 +141,15 @@
 		CDDAC2C1189F9706002298E6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CDDAC308189F975B002298E6 /* EstimoteSDK */,
+				CDDAC2FF189F9745002298E6 /* GCD */,
+				CDDAC2F1189F9725002298E6 /* CoreBluetooth.framework */,
+				CDDAC2F2189F9725002298E6 /* CoreLocation.framework */,
+				CDDAC2F3189F9725002298E6 /* SystemConfiguration.framework */,
+				CDDAC2F4189F9725002298E6 /* Foundation.framework */,
+				CDDAC2F5189F9725002298E6 /* CoreGraphics.framework */,
+				CDDAC2F6189F9725002298E6 /* UIKit.framework */,
+				CDDAC2F7189F9725002298E6 /* XCTest.framework */,
 				CDDAC2C2189F9706002298E6 /* Foundation.framework */,
 				CDDAC2C4189F9706002298E6 /* CoreGraphics.framework */,
 				CDDAC2C6189F9706002298E6 /* UIKit.framework */,
@@ -142,6 +196,39 @@
 				CDDAC2E4189F9707002298E6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CDDAC2FF189F9745002298E6 /* GCD */ = {
+			isa = PBXGroup;
+			children = (
+				CDDAC300189F9752002298E6 /* Documentation.html */,
+				CDDAC301189F9752002298E6 /* GCDAsyncSocket.h */,
+				CDDAC302189F9752002298E6 /* GCDAsyncSocket.m */,
+				CDDAC303189F9752002298E6 /* GCDAsyncUdpSocket.h */,
+				CDDAC304189F9752002298E6 /* GCDAsyncUdpSocket.m */,
+			);
+			name = GCD;
+			sourceTree = "<group>";
+		};
+		CDDAC308189F975B002298E6 /* EstimoteSDK */ = {
+			isa = PBXGroup;
+			children = (
+				CDDAC310189F9779002298E6 /* Headers */,
+				CDDAC30E189F9773002298E6 /* libEstimoteSDK.a */,
+			);
+			name = EstimoteSDK;
+			sourceTree = "<group>";
+		};
+		CDDAC310189F9779002298E6 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				CDDAC309189F9773002298E6 /* ESTBeacon.h */,
+				CDDAC30A189F9773002298E6 /* ESTBeaconDefinitions.h */,
+				CDDAC30B189F9773002298E6 /* ESTBeaconManager.h */,
+				CDDAC30C189F9773002298E6 /* ESTBeaconRegion.h */,
+				CDDAC30D189F9773002298E6 /* ESTBeaconUpdateInfo.h */,
+			);
+			name = Headers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,7 +307,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDDAC2CD189F9706002298E6 /* InfoPlist.strings in Resources */,
+				CDDAC305189F9752002298E6 /* Documentation.html in Resources */,
 				CDDAC2D5189F9706002298E6 /* Images.xcassets in Resources */,
+				CDDAC315189F9799002298E6 /* IndoorViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +328,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDDAC307189F9752002298E6 /* GCDAsyncUdpSocket.m in Sources */,
+				CDDAC306189F9752002298E6 /* GCDAsyncSocket.m in Sources */,
+				CDDAC314189F9799002298E6 /* IndoorViewController.m in Sources */,
 				CDDAC2D3189F9706002298E6 /* AppDelegate.m in Sources */,
 				CDDAC2CF189F9706002298E6 /* main.m in Sources */,
 			);
@@ -361,10 +453,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IndoorGPS/IndoorGPS-Prefix.pch";
 				INFOPLIST_FILE = "IndoorGPS/IndoorGPS-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/MyMac/Documents/IOS\\ Programmierung/OpenDoor/EstimoteSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -374,10 +475,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IndoorGPS/IndoorGPS-Prefix.pch";
 				INFOPLIST_FILE = "IndoorGPS/IndoorGPS-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/MyMac/Documents/IOS\\ Programmierung/OpenDoor/EstimoteSDK",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -443,6 +553,7 @@
 				CDDAC2ED189F9707002298E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CDDAC2EE189F9707002298E6 /* Build configuration list for PBXNativeTarget "IndoorGPSTests" */ = {
 			isa = XCConfigurationList;
@@ -451,6 +562,7 @@
 				CDDAC2F0189F9707002298E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

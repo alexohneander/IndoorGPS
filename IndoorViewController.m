@@ -100,7 +100,7 @@
         self.selectedBeaconThree = [beacons objectAtIndex:2];
         
         NSString *selectedBeaconThree = [NSString stringWithFormat:
-                                       @"B.Two: %@",
+                                       @"B.Three: %@",
                                        [beacons objectAtIndex:2]];
         
         NSLog(@"B.Two: %@", selectedBeaconThree);
@@ -130,10 +130,12 @@
     
     // Calculate the distance from Beacon
     NSString* beaconDistanceOne = [NSString stringWithFormat:
-                                   @"Distance: %f",
-                                   [self.selectedBeacon.distance floatValue]];
+                                   @"Distance: %i",
+                                   [self.selectedBeacon.distance intValue]];
     NSLog(@"Nsstring = %@", beaconDistanceOne);
     self.beaconDistanceOne.text = beaconDistanceOne;
+    
+    NSArray *beaconArrayOne = beaconDistanceOne;
     
     // My Postion!
     // calculate and set new y position
@@ -183,8 +185,8 @@
     
     // Calculate the distance from Beacon
     NSString* beaconDistanceTwo = [NSString stringWithFormat:
-                                   @"Distance: %f",
-                                   [self.selectedBeaconTwo.distance floatValue]];
+                                   @"Distance: %i",
+                                   [self.selectedBeaconTwo.distance intValue]];
     NSLog(@"Nsstring = %@", beaconDistanceTwo);
     self.beaconDistanceTwo.text = beaconDistanceTwo;
     
@@ -236,10 +238,11 @@
     
     // Calculate the distance from Beacon
     NSString* beaconDistanceThree = [NSString stringWithFormat:
-                                   @"Distance: %f",
-                                   [self.selectedBeaconThree.distance floatValue]];
+                                   @"Distance: %i",
+                                   [self.selectedBeaconThree.distance intValue]];
     NSLog(@"Nsstring = %@", beaconDistanceThree);
     self.beaconDistanceThree.text = beaconDistanceThree;
+    
     
     // My Postion!
     // calculate and set new y position

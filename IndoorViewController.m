@@ -20,6 +20,8 @@
 @property (nonatomic, strong) GCDAsyncSocket  *gcdAsync;
 @property (nonatomic, copy)   NSDictionary    *keyDictionary;
 @property (nonatomic, copy)   NSString        *parsedUrl;
+@property (nonatomic)         NSInteger       averageArrayIndex;
+//@property (nonatomic, copy)   NSMutableArray  *beaconArrayOne;
 @end
 
 @implementation IndoorViewController
@@ -34,7 +36,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    
     
     [self readPlist];
     
@@ -59,10 +60,17 @@
 
 
 
+
+
+
 -(void)beaconManager:(ESTBeaconManager *)manager
      didRangeBeacons:(NSArray *)beacons
             inRegion:(ESTBeaconRegion *)region
 {
+    NSMutableArray* beaconArrayOne     =   [[NSMutableArray alloc] initWithCapacity:5];
+    NSMutableArray* beaconArrayTwo     =   [[NSMutableArray alloc] initWithCapacity:5];
+    NSMutableArray* beaconArrayThree   =   [[NSMutableArray alloc] initWithCapacity:5];
+    
     //IF for Beacon One
     if([beacons count] > 0)
     {
@@ -100,14 +108,14 @@
         self.selectedBeaconThree = [beacons objectAtIndex:2];
         
         NSString *selectedBeaconThree = [NSString stringWithFormat:
-                                       @"B.Three: %@",
-                                       [beacons objectAtIndex:2]];
+                                         @"B.Three: %@",
+                                         [beacons objectAtIndex:2]];
         
         NSLog(@"B.Two: %@", selectedBeaconThree);
         self.beaconLabelThree.text = selectedBeaconThree;
     }
     
-///////////////////////////////Beacon One/////////////////////////////////////
+    ///////////////////////////////Beacon One/////////////////////////////////////
     // Beacon Postion!
     // beacon array is sorted based on distanceˆ
     // closest beacon is the first one
@@ -135,7 +143,6 @@
     NSLog(@"Nsstring = %@", beaconDistanceOne);
     self.beaconDistanceOne.text = beaconDistanceOne;
     
-    NSArray *beaconArrayOne = beaconDistanceOne;
     
     // My Postion!
     // calculate and set new y position
@@ -158,25 +165,25 @@
     }
     
     self.distanceLabel.text = labelText;
-///////////////////////////////Beacon One/////////////////////////////////////
+    ///////////////////////////////Beacon One/////////////////////////////////////
     
     
     
-///////////////////////////////Beacon Two/////////////////////////////////////
+    ///////////////////////////////Beacon Two/////////////////////////////////////
     // Beacon Postion!
     // beacon array is sorted based on distanceˆ
     // closest beacon is the first one
     NSString* labelTextTwo = [NSString stringWithFormat:
-                           @"Major: %i, Minor: %i\nRegion: ",
-                           [self.selectedBeaconTwo.major unsignedShortValue],
-                           [self.selectedBeaconTwo.minor unsignedShortValue]];
+                              @"Major: %i, Minor: %i\nRegion: ",
+                              [self.selectedBeaconTwo.major unsignedShortValue],
+                              [self.selectedBeaconTwo.minor unsignedShortValue]];
     
     
     // Make key from Major + Minor
     NSString *MajorMinorTwo = [NSString stringWithFormat:
-                            @"%i-%i",
-                            [self.selectedBeaconTwo.major unsignedShortValue],
-                            [self.selectedBeaconTwo.minor unsignedShortValue]];
+                               @"%i-%i",
+                               [self.selectedBeaconTwo.major unsignedShortValue],
+                               [self.selectedBeaconTwo.minor unsignedShortValue]];
     NSLog(@"NSString = %@", MajorMinorTwo);
     
     // Starting Compare Plist
@@ -189,6 +196,9 @@
                                    [self.selectedBeaconTwo.distance intValue]];
     NSLog(@"Nsstring = %@", beaconDistanceTwo);
     self.beaconDistanceTwo.text = beaconDistanceTwo;
+    
+    
+    
     
     // My Postion!
     // calculate and set new y position
@@ -211,25 +221,25 @@
     }
     
     self.distanceLabelTwo.text = labelTextTwo;
-///////////////////////////////Beacon Two/////////////////////////////////////
+    ///////////////////////////////Beacon Two/////////////////////////////////////
     
     
     
-///////////////////////////////Beacon Three/////////////////////////////////////
+    ///////////////////////////////Beacon Three/////////////////////////////////////
     // Beacon Postion!
     // beacon array is sorted based on distanceˆ
     // closest beacon is the first one
     NSString* labelTextThree = [NSString stringWithFormat:
-                              @"Major: %i, Minor: %i\nRegion: ",
-                              [self.selectedBeaconThree.major unsignedShortValue],
-                              [self.selectedBeaconThree.minor unsignedShortValue]];
+                                @"Major: %i, Minor: %i\nRegion: ",
+                                [self.selectedBeaconThree.major unsignedShortValue],
+                                [self.selectedBeaconThree.minor unsignedShortValue]];
     
     
     // Make key from Major + Minor
     NSString *MajorMinorThree = [NSString stringWithFormat:
-                               @"%i-%i",
-                               [self.selectedBeaconThree.major unsignedShortValue],
-                               [self.selectedBeaconThree.minor unsignedShortValue]];
+                                 @"%i-%i",
+                                 [self.selectedBeaconThree.major unsignedShortValue],
+                                 [self.selectedBeaconThree.minor unsignedShortValue]];
     NSLog(@"NSString = %@", MajorMinorThree);
     
     // Starting Compare Plist
@@ -238,10 +248,11 @@
     
     // Calculate the distance from Beacon
     NSString* beaconDistanceThree = [NSString stringWithFormat:
-                                   @"Distance: %i",
-                                   [self.selectedBeaconThree.distance intValue]];
+                                     @"Distance: %i",
+                                     [self.selectedBeaconThree.distance intValue]];
     NSLog(@"Nsstring = %@", beaconDistanceThree);
     self.beaconDistanceThree.text = beaconDistanceThree;
+    
     
     
     // My Postion!
@@ -265,12 +276,27 @@
     }
     
     self.distanceLabelThree.text = labelTextThree;
-///////////////////////////////Beacon Three/////////////////////////////////////
+    ///////////////////////////////Beacon Three/////////////////////////////////////
     
     
+    [beaconArrayOne insertObject:beaconDistanceOne atIndex: self.averageArrayIndex];
+    NSLog(@"ArrayOne = %@", beaconArrayOne);
     
+    [beaconArrayTwo insertObject:beaconDistanceTwo atIndex: self.averageArrayIndex];
+    NSLog(@"ArrayTwo = %@", beaconArrayTwo);
+    
+    [beaconArrayThree insertObject:beaconDistanceThree atIndex: self.averageArrayIndex];
+    NSLog(@"ArrayThree = %@", beaconArrayThree);
     
 }
+
+
+
+
+
+
+
+
 
 
 // Reading Plist.
@@ -303,5 +329,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 @end

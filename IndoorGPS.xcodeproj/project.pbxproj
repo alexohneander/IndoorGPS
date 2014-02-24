@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CDB50BB818BB615600B145A2 /* IM-IndoorGPS.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB50BB718BB615600B145A2 /* IM-IndoorGPS.png */; };
 		CDDAC2C3189F9706002298E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2C2189F9706002298E6 /* Foundation.framework */; };
 		CDDAC2C5189F9706002298E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2C4189F9706002298E6 /* CoreGraphics.framework */; };
 		CDDAC2C7189F9706002298E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2C6189F9706002298E6 /* UIKit.framework */; };
@@ -33,6 +32,8 @@
 		CDDAC30F189F9773002298E6 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC30E189F9773002298E6 /* libEstimoteSDK.a */; };
 		CDDAC314189F9799002298E6 /* IndoorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDAC312189F9799002298E6 /* IndoorViewController.m */; };
 		CDDAC315189F9799002298E6 /* IndoorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDDAC313189F9799002298E6 /* IndoorViewController.xib */; };
+		CDEB6BEC18BB8C1000AA6DC4 /* IM-IndoorGPS.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEB6BEB18BB8C1000AA6DC4 /* IM-IndoorGPS.png */; };
+		CDEB6BED18BB8C1000AA6DC4 /* IM-IndoorGPS.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEB6BEB18BB8C1000AA6DC4 /* IM-IndoorGPS.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CDB50BB718BB615600B145A2 /* IM-IndoorGPS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IM-IndoorGPS.png"; sourceTree = SOURCE_ROOT; };
 		CDDAC2BF189F9706002298E6 /* IndoorGPS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IndoorGPS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDDAC2C2189F9706002298E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CDDAC2C4189F9706002298E6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -84,6 +84,7 @@
 		CDDAC311189F9799002298E6 /* IndoorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorViewController.h; sourceTree = "<group>"; };
 		CDDAC312189F9799002298E6 /* IndoorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndoorViewController.m; sourceTree = "<group>"; };
 		CDDAC313189F9799002298E6 /* IndoorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndoorViewController.xib; sourceTree = "<group>"; };
+		CDEB6BEB18BB8C1000AA6DC4 /* IM-IndoorGPS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IM-IndoorGPS.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -194,8 +195,8 @@
 		CDDAC2E2189F9707002298E6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CDEB6BEB18BB8C1000AA6DC4 /* IM-IndoorGPS.png */,
 				CDDAC2E3189F9707002298E6 /* IndoorGPSTests-Info.plist */,
-				CDB50BB718BB615600B145A2 /* IM-IndoorGPS.png */,
 				CDDAC2E4189F9707002298E6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -313,6 +314,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDDAC2CD189F9706002298E6 /* InfoPlist.strings in Resources */,
+				CDEB6BEC18BB8C1000AA6DC4 /* IM-IndoorGPS.png in Resources */,
 				CDDAC305189F9752002298E6 /* Documentation.html in Resources */,
 				CDDAC2D5189F9706002298E6 /* Images.xcassets in Resources */,
 				CDDAC315189F9799002298E6 /* IndoorViewController.xib in Resources */,
@@ -324,7 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDDAC2E6189F9707002298E6 /* InfoPlist.strings in Resources */,
-				CDB50BB818BB615600B145A2 /* IM-IndoorGPS.png in Resources */,
+				CDEB6BED18BB8C1000AA6DC4 /* IM-IndoorGPS.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

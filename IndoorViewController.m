@@ -23,7 +23,6 @@
 @property (nonatomic, copy)     NSString                    *parsedUrl;
 @property (nonatomic)           NSInteger                   averageArrayIndex;
 @property (nonatomic, strong)   NSDictionary                *beaconDictionary;
-@property (nonatomic, strong)   NSArray                     *keys;
 
 
 @end
@@ -45,7 +44,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     self.beaconDictionary     =   [NSDictionary dictionary];
-    self.keys                 =   [NSArray array];
+    NSMutableArray *beaconKeys     =   [[NSMutableArray alloc] initWithCapacity:5];
     
     
     [self readPlist];
@@ -290,7 +289,7 @@
     
     //////////////////////////////AverageArrayIndex Counter/////////////////////////
     
-    [keys insertObject:beaconDistanceOne atIndex: self.averageArrayIndex];
+    [beaco]
     
     NSArray *objects    =[NSArray arrayWithObjects:beaconDistanceOne, beaconDistanceTwo, beaconDistanceThree, nil];
     

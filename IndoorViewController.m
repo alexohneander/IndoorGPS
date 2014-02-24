@@ -11,17 +11,21 @@
 
 @interface IndoorViewController () <ESTBeaconManagerDelegate>
 
-@property (nonatomic, strong) ESTBeaconManager* beaconManager;
-@property (nonatomic, strong) ESTBeacon* selectedBeacon;
-@property (nonatomic, strong) ESTBeacon* selectedBeaconTwo;
-@property (nonatomic, strong) ESTBeacon* selectedBeaconThree;
-@property (nonatomic, strong) NSMutableData   *buffer;
-@property (nonatomic, strong) NSURLConnection *connection;
-@property (nonatomic, strong) GCDAsyncSocket  *gcdAsync;
-@property (nonatomic, copy)   NSDictionary    *keyDictionary;
-@property (nonatomic, copy)   NSString        *parsedUrl;
-@property (nonatomic)         NSInteger       averageArrayIndex;
-//@property (nonatomic, copy)   NSMutableArray  *beaconArrayOne;
+@property (nonatomic, strong) ESTBeaconManager*         beaconManager;
+@property (nonatomic, strong) ESTBeacon*                selectedBeacon;
+@property (nonatomic, strong) ESTBeacon*                selectedBeaconTwo;
+@property (nonatomic, strong) ESTBeacon*                selectedBeaconThree;
+@property (nonatomic, strong) GCDAsyncSocket            *gcdAsync;
+
+@property (nonatomic, strong)   NSMutableData               *buffer;
+@property (nonatomic, strong)   NSURLConnection             *connection;
+@property (nonatomic, copy)     NSDictionary                *keyDictionary;
+@property (nonatomic, copy)     NSString                    *parsedUrl;
+@property (nonatomic)           NSInteger                   averageArrayIndex;
+@property (nonatomic, strong)   NSDictionary                *beaconDictionary;
+@property (nonatomic, strong)   NSArray                     *keys;
+
+
 @end
 
 @implementation IndoorViewController
@@ -32,15 +36,21 @@
     NSLog(@"Cool, I'm connected! That was easy.");
 }
 
+
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    self.beaconDictionary     =   [NSDictionary dictionary];
+    self.keys                 =   [NSArray array];
+    
+    
     [self readPlist];
     
-    
-    
+    self.averageArrayIndex = 0;
     
     /////////////////////////////////////////////////////////////
     // setup Estimote beacon manager
@@ -61,15 +71,11 @@
 
 
 
-
-
 -(void)beaconManager:(ESTBeaconManager *)manager
      didRangeBeacons:(NSArray *)beacons
             inRegion:(ESTBeaconRegion *)region
 {
-    NSMutableArray* beaconArrayOne     =   [[NSMutableArray alloc] initWithCapacity:5];
-    NSMutableArray* beaconArrayTwo     =   [[NSMutableArray alloc] initWithCapacity:5];
-    NSMutableArray* beaconArrayThree   =   [[NSMutableArray alloc] initWithCapacity:5];
+
     
     //IF for Beacon One
     if([beacons count] > 0)
@@ -137,6 +143,7 @@
     
     
     // Calculate the distance from Beacon
+    
     NSString* beaconDistanceOne = [NSString stringWithFormat:
                                    @"Distance: %i",
                                    [self.selectedBeacon.distance intValue]];
@@ -278,25 +285,35 @@
     self.distanceLabelThree.text = labelTextThree;
     ///////////////////////////////Beacon Three/////////////////////////////////////
     
+   
     
-    [beaconArrayOne insertObject:beaconDistanceOne atIndex: self.averageArrayIndex];
-    NSLog(@"ArrayOne = %@", beaconArrayOne);
     
-    [beaconArrayTwo insertObject:beaconDistanceTwo atIndex: self.averageArrayIndex];
-    NSLog(@"ArrayTwo = %@", beaconArrayTwo);
+    //////////////////////////////AverageArrayIndex Counter/////////////////////////
     
-    [beaconArrayThree insertObject:beaconDistanceThree atIndex: self.averageArrayIndex];
-    NSLog(@"ArrayThree = %@", beaconArrayThree);
+    [keys insertObject:beaconDistanceOne atIndex: self.averageArrayIndex];
+    
+    NSArray *objects    =[NSArray arrayWithObjects:beaconDistanceOne, beaconDistanceTwo, beaconDistanceThree, nil];
+    
+    if ([self.beaconDictionary objectForKey:keys]) {
+        [self.beaconDictionary setValue:objects forKey:keys];
+    }
+    else
+    {
+        [self.beaconDictionary setValue:objects forUndefinedKey:keys];
+    }
+    
+    
+    
+    
+    // Iterate the NSDictionary
+    for (id key in self.beaconDictionary) {
+        NSLog(@"key: %@   value:%@", key, [self.beaconDictionary objectForKey:key]);
+    }
+    
+    
+
     
 }
-
-
-
-
-
-
-
-
 
 
 // Reading Plist.

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CDB50BB818BB615600B145A2 /* IM-IndoorGPS.png in Resources */ = {isa = PBXBuildFile; fileRef = CDB50BB718BB615600B145A2 /* IM-IndoorGPS.png */; };
 		CDDAC2C3189F9706002298E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2C2189F9706002298E6 /* Foundation.framework */; };
 		CDDAC2C5189F9706002298E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2C4189F9706002298E6 /* CoreGraphics.framework */; };
 		CDDAC2C7189F9706002298E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2C6189F9706002298E6 /* UIKit.framework */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CDB50BB718BB615600B145A2 /* IM-IndoorGPS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IM-IndoorGPS.png"; sourceTree = SOURCE_ROOT; };
 		CDDAC2BF189F9706002298E6 /* IndoorGPS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IndoorGPS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDDAC2C2189F9706002298E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		CDDAC2C4189F9706002298E6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				CDDAC2E3189F9707002298E6 /* IndoorGPSTests-Info.plist */,
+				CDB50BB718BB615600B145A2 /* IM-IndoorGPS.png */,
 				CDDAC2E4189F9707002298E6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -278,6 +281,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Alex Wellnitz";
 				TargetAttributes = {
+					CDDAC2BE189F9706002298E6 = {
+						DevelopmentTeam = DC345ZJC9F;
+					};
 					CDDAC2D9189F9707002298E6 = {
 						TestTargetID = CDDAC2BE189F9706002298E6;
 					};
@@ -318,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CDDAC2E6189F9707002298E6 /* InfoPlist.strings in Resources */,
+				CDB50BB818BB615600B145A2 /* IM-IndoorGPS.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,6 +460,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -465,6 +474,7 @@
 					"/Users/MyMac/Documents/IOS\\ Programmierung/OpenDoor/EstimoteSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "D66EC5AF-7B2D-46E1-90DE-9AF7CFFA16EF";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -475,6 +485,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -487,6 +499,7 @@
 					"/Users/MyMac/Documents/IOS\\ Programmierung/OpenDoor/EstimoteSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "D66EC5AF-7B2D-46E1-90DE-9AF7CFFA16EF";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};

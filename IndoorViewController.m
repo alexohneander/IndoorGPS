@@ -112,7 +112,12 @@
         [self.beaconDictionary  setObject:distanceArray forKey:majorMinor];
         
     }
-    NSLog(@"Nsstring = %@ ", self.beaconDictionary);
+    NSLog(@"My Dic = %@ ", self.beaconDictionary);
+    
+    
+    
+    
+    
     
     
 }

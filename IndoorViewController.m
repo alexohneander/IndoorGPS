@@ -69,37 +69,27 @@
 {
     for (ESTBeacon* beacon in beacons)
     {
-        ///////////////////////////////Beacon /////////////////////////////////////
-        // Beacon Postion!
-        // beacon array is sorted based on distanceˆ
-        // closest beacon is the first one
-        NSString* labelText = [NSString stringWithFormat:
-                               @"Major: %i, Minor: %i\nRegion: ",
-                               [beacon.major unsignedShortValue],
-                               [beacon.minor unsignedShortValue]];
+        //Format Label Text, ID and Distance
+        NSString* labelText         = [NSString stringWithFormat:
+                                       @"Major: %i, Minor: %i\nRegion: ",
+                                       [beacon.major unsignedShortValue],
+                                       [beacon.minor unsignedShortValue]];
         
-        
-        // Make key from Major + Minor
-        NSString* majorMinor = [NSString stringWithFormat:
-                                @"%i-%i",
-                                [beacon.major unsignedShortValue],
-                                [beacon.minor unsignedShortValue]];
+        NSString* majorMinor        = [NSString stringWithFormat:
+                                       @"%i-%i",
+                                       [beacon.major unsignedShortValue],
+                                       [beacon.minor unsignedShortValue]];
        
-        
-
-        // Calculate the distance from Beacon
-        
-        NSString* beaconDistance = [NSString stringWithFormat:
+        NSString* beaconDistance    = [NSString stringWithFormat:
                                        @"Distance: %i",
                                        [beacon.distance intValue]];
         
+        //Label Text
         self.beaconDistanceOne.text = beaconDistance;
-
-        
         self.distanceLabel.text = labelText;
-        ///////////////////////////////Beacon /////////////////////////////////////
         
         
+        //Checking if Key exist
         NSMutableArray* distanceArray = [NSMutableArray array];
         
         if ([self.beaconDictionary objectForKey:majorMinor])
@@ -114,7 +104,11 @@
     }
     NSLog(@"My Dic = %@ ", self.beaconDictionary);
     
-    
+    //Checking if more than 2 Beacons alife.
+    if([beacons count] > 2)
+    {
+        
+    }
     
     
     

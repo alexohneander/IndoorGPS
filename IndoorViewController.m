@@ -9,6 +9,10 @@
 #import "IndoorViewController.h"
 #import "ESTBeaconManager.h"
 
+//Animation (Test Ball)//
+#import <QuartzCore/QuartzCore.h>
+//Animation (Test Ball)//
+
 @interface IndoorViewController () <ESTBeaconManagerDelegate>
 
 @property (nonatomic, strong) ESTBeaconManager*         beaconManager;
@@ -20,27 +24,40 @@
 @property (nonatomic)           NSInteger                   averageArrayIndex;
 @property (nonatomic, strong)   NSMutableDictionary         *beaconDictionary;
 
-
+@property(nonatomic)            UIImage                     *ballImage;
+@property(nonatomic)            UIImageView                 *ball;
+@property(nonatomic, assign)    CGPoint                     position;
+@property(nonatomic)            NSString                    *beaconDistance;
+@property(nonatomic)            NSInteger                   *countDistance;
+@property(nonatomic)            NSInteger                   beaconInteger;
 @end
+
 
 @implementation IndoorViewController
 
-
+/* I don`t need this anymore!
 - (void)socket:(GCDAsyncSocket *)sender didConnectToHost:(NSString *)host port:(UInt16)port
 {
     NSLog(@"Cool, I'm connected! That was easy.");
 }
-
+*/
 
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	
+    //Animation (Test Ball)//
+    UIImage *ballImage = [UIImage imageNamed:@"test-ball"];
+    self.ball = [[UIImageView alloc] initWithImage:ballImage];
+    [self.view addSubview:self.ball];
     
+    //Animation (Test Ball)//
+    
+    
+    ///////////Beacon /////////////
     self.beaconDictionary     =   [NSMutableDictionary dictionary];
-    
     
     self.averageArrayIndex = 0;
     
@@ -58,9 +75,21 @@
     // start looking for estimote beacons in region
     // when beacon ranged beaconManager:didRangeBeacons:inRegion: invoked
     [self.beaconManager startRangingBeaconsInRegion:region];
+    
+    
+   
+    
+    CGPoint position  = CGPointMake(1,1);
+   [self ballAnimation:position];
+    
+    
 }
 
-
+- (void)ballAnimation:(CGPoint)position{
+    position.x = 0;
+    position.y = 1000;
+    self.ball.center = position;
+}
 
 
 -(void)beaconManager:(ESTBeaconManager *)manager
@@ -70,22 +99,23 @@
     for (ESTBeacon* beacon in beacons)
     {
         //Format Label Text, ID and Distance
-        NSString* labelText         = [NSString stringWithFormat:
-                                       @"Major: %i, Minor: %i\nRegion: ",
-                                       [beacon.major unsignedShortValue],
-                                       [beacon.minor unsignedShortValue]];
+        NSString* labelText         =   [NSString stringWithFormat:
+                                         @"Major: %i, Minor: %i\nRegion: ",
+                                         [beacon.major unsignedShortValue],
+                                         [beacon.minor unsignedShortValue]];
         
-        NSString* majorMinor        = [NSString stringWithFormat:
-                                       @"%i-%i",
-                                       [beacon.major unsignedShortValue],
-                                       [beacon.minor unsignedShortValue]];
+        NSString* majorMinor        =   [NSString stringWithFormat:
+                                         @"%i-%i",
+                                         [beacon.major unsignedShortValue],
+                                         [beacon.minor unsignedShortValue]];
        
-        NSString* beaconDistance    = [NSString stringWithFormat:
-                                       @"Distance: %i",
-                                       [beacon.distance intValue]];
+        //The working entry
+        self.beaconDistance     =   [NSString stringWithFormat:@"%d",[beacon.distance intValue]];
+        //the not working entry?
+        self.beaconInteger      =   [beacon.distance intValue];
         
         //Label Text
-        self.beaconDistanceOne.text = beaconDistance;
+        self.beaconDistanceOne.text = self.beaconDistance;
         self.distanceLabel.text = labelText;
         
         
@@ -98,16 +128,28 @@
             
         }
         
-        [distanceArray addObject:beaconDistance];
+        [distanceArray addObject:self.beaconDistance];
         [self.beaconDictionary  setObject:distanceArray forKey:majorMinor];
         
     }
-    NSLog(@"My Dic = %@ ", self.beaconDictionary);
+        NSLog(@"My Dic = %@ ", self.beaconDictionary);
+    
+    
+    
     
     //Checking if more than 2 Beacons alife.
     if([beacons count] > 2)
     {
+        self.position = CGPointMake(150+20, 180+30);
+        self.ball.center = self.position;
         
+       /* int zahl1 = [self.beaconDictionary objectAtIndex:0];
+        
+        int summe = zahl1 + 100;
+        
+        NSLog(@"Meine Summe= %d ", summe);
+        
+        */
     }
     
     

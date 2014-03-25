@@ -7,21 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GCDAsyncSocket.h"
 
+/* I dont need this anymore
+#import "GCDAsyncSocket.h"
+*/
 @interface IndoorViewController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UILabel* distanceLabel;
 @property (nonatomic, strong) IBOutlet UILabel* beaconDistanceOne;
 @property (nonatomic, strong) IBOutlet UILabel* beaconLabelOne;
-
-@property (nonatomic, strong) IBOutlet UILabel* distanceLabelTwo;
-@property (nonatomic, strong) IBOutlet UILabel* beaconDistanceTwo;
-@property (nonatomic, strong) IBOutlet UILabel* beaconLabelTwo;
-
-@property (nonatomic, strong) IBOutlet UILabel* distanceLabelThree;
-@property (nonatomic, strong) IBOutlet UILabel* beaconDistanceThree;
-@property (nonatomic, strong) IBOutlet UILabel* beaconLabelThree;
 
 @end
 

@@ -16,31 +16,36 @@
 @interface IndoorViewController () <ESTBeaconManagerDelegate>
 
 @property (nonatomic, strong) ESTBeaconManager*         beaconManager;
-@property (nonatomic, strong) GCDAsyncSocket            *gcdAsync;
 
-@property (nonatomic, strong)   NSMutableData               *buffer;
-@property (nonatomic, strong)   NSURLConnection             *connection;
-@property (nonatomic, copy)     NSString                    *parsedUrl;
+/* I dont need this anymore
+ @property (nonatomic, strong) GCDAsyncSocket            *gcdAsync;
+ */
+
+@property (nonatomic, strong)   NSMutableData*              buffer;
+@property (nonatomic, strong)   NSURLConnection*            connection;
+@property (nonatomic, copy)     NSString*                   parsedUrl;
 @property (nonatomic)           NSInteger                   averageArrayIndex;
-@property (nonatomic, strong)   NSMutableDictionary         *beaconDictionary;
+@property (nonatomic, strong)   NSMutableDictionary*        beaconDictionary;
 
-@property(nonatomic)            UIImage                     *ballImage;
-@property(nonatomic)            UIImageView                 *ball;
+@property(nonatomic)            UIImage*                    ballImage;
+@property(nonatomic)            UIImageView*                ball;
 @property(nonatomic, assign)    CGPoint                     position;
-@property(nonatomic)            NSString                    *beaconDistance;
-@property(nonatomic)            NSInteger                   *countDistance;
+@property(nonatomic)            NSString*                   beaconDistance;
+@property(nonatomic)            NSInteger*                  countDistance;
 @property(nonatomic)            NSInteger                   beaconInteger;
+@property(nonatomic)            NSMutableArray*             distanceArray;
+@property (nonatomic, assign)   int                         index;
 @end
 
 
 @implementation IndoorViewController
 
 /* I don`t need this anymore!
-- (void)socket:(GCDAsyncSocket *)sender didConnectToHost:(NSString *)host port:(UInt16)port
-{
-    NSLog(@"Cool, I'm connected! That was easy.");
-}
-*/
+ - (void)socket:(GCDAsyncSocket *)sender didConnectToHost:(NSString *)host port:(UInt16)port
+ {
+ NSLog(@"Cool, I'm connected! That was easy.");
+ }
+ */
 
 
 
@@ -77,10 +82,10 @@
     [self.beaconManager startRangingBeaconsInRegion:region];
     
     
-   
+    
     
     CGPoint position  = CGPointMake(1,1);
-   [self ballAnimation:position];
+    [self ballAnimation:position];
     
     
 }
@@ -96,6 +101,7 @@
      didRangeBeacons:(NSArray *)beacons
             inRegion:(ESTBeaconRegion *)region
 {
+    NSMutableArray* activeBeaconIds = [NSMutableArray array];
     for (ESTBeacon* beacon in beacons)
     {
         //Format Label Text, ID and Distance
@@ -108,11 +114,12 @@
                                          @"%i-%i",
                                          [beacon.major unsignedShortValue],
                                          [beacon.minor unsignedShortValue]];
-       
+        
+        
+        
         //The working entry
         self.beaconDistance     =   [NSString stringWithFormat:@"%d",[beacon.distance intValue]];
-        //the not working entry?
-        self.beaconInteger      =   [beacon.distance intValue];
+        
         
         //Label Text
         self.beaconDistanceOne.text = self.beaconDistance;
@@ -120,36 +127,41 @@
         
         
         //Checking if Key exist
-        NSMutableArray* distanceArray = [NSMutableArray array];
+        self.distanceArray = [NSMutableArray array];
         
         if ([self.beaconDictionary objectForKey:majorMinor])
         {
-            distanceArray = [self.beaconDictionary objectForKey:majorMinor];
+            self.distanceArray = [self.beaconDictionary objectForKey:majorMinor];
             
         }
         
-        [distanceArray addObject:self.beaconDistance];
-        [self.beaconDictionary  setObject:distanceArray forKey:majorMinor];
+        [self.distanceArray addObject:self.beaconDistance];
+        
+        if ([self.distanceArray count] > 9 ){
+            [activeBeaconIds addObject:majorMinor];
+        }
+        
+        [self.beaconDictionary  setObject:self.distanceArray forKey:majorMinor];
         
     }
-        NSLog(@"My Dic = %@ ", self.beaconDictionary);
     
     
     
+    self.index = 0;
     
     //Checking if more than 2 Beacons alife.
-    if([beacons count] > 2)
+    if([activeBeaconIds count] > 2)
     {
         self.position = CGPointMake(150+20, 180+30);
         self.ball.center = self.position;
         
-       /* int zahl1 = [self.beaconDictionary objectAtIndex:0];
+        NSLog(@"My Dic = %@ ", self.beaconDictionary);
+        NSLog(@"Habe 3 Beacons gefunden mit jeweils 10 oder mehr Werten!");
         
-        int summe = zahl1 + 100;
         
-        NSLog(@"Meine Summe= %d ", summe);
         
-        */
+        
+                
     }
     
     

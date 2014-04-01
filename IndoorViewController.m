@@ -155,13 +155,44 @@
         self.position = CGPointMake(150+20, 180+30);
         self.ball.center = self.position;
         
+        
+        for (int i=0; i<[activeBeaconIds count] ; i++)
+        {
+            NSLog(@"%@", [self.beaconDictionary objectForKey:activeBeaconIds[i]]);
+            
+            
+            
+            
+            NSCountedSet *countedSet = [[NSCountedSet alloc] initWithArray:[self.beaconDictionary objectForKey:activeBeaconIds[i]]];
+            
+            NSInteger maxCount = 0;
+            NSNumber *maxNumber;
+            
+            for (NSNumber *number in countedSet) {
+                if ([countedSet countForObject:number] > maxCount) {
+                    maxCount = [countedSet countForObject:number];
+                    maxNumber = number;
+                    NSLog(@" Mein Asymetrischer Mittelwert= %@", maxNumber);
+                }
+            }
+            
+            
+            
+            
+        
+        }
+        
+        
+        
+        
+        
+        /*
+         Diese funktion wird aufgerufen wenn das Dictionary geleert werden soll!
+         */
+        [self.beaconDictionary removeAllObjects];
         NSLog(@"My Dic = %@ ", self.beaconDictionary);
-        NSLog(@"Habe 3 Beacons gefunden mit jeweils 10 oder mehr Werten!");
-        
-        
-        
-        
-                
+        NSLog(@"Dictionary wurde geleert");
+         
     }
     
     

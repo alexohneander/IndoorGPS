@@ -18,12 +18,12 @@
 @property (nonatomic, strong) ESTBeaconManager*         beaconManager;
 
 /* I dont need this anymore
- @property (nonatomic, strong) GCDAsyncSocket            *gcdAsync;
- */
-
+@property (nonatomic, strong)   GCDAsyncSocket*             gcdAsync;
 @property (nonatomic, strong)   NSMutableData*              buffer;
 @property (nonatomic, strong)   NSURLConnection*            connection;
 @property (nonatomic, copy)     NSString*                   parsedUrl;
+ */
+
 @property (nonatomic)           NSInteger                   averageArrayIndex;
 @property (nonatomic, strong)   NSMutableDictionary*        beaconDictionary;
 
@@ -34,7 +34,9 @@
 @property(nonatomic)            NSInteger*                  countDistance;
 @property(nonatomic)            NSInteger                   beaconInteger;
 @property(nonatomic)            NSMutableArray*             distanceArray;
-@property (nonatomic, assign)   int                         index;
+@property(nonatomic)            NSMutableDictionary*        radiusArray;
+@property(nonatomic)            NSString*                   majorMinor;
+@property(nonatomic)            NSMutableArray*             middleValue;
 @end
 
 
@@ -110,7 +112,7 @@
                                          [beacon.major unsignedShortValue],
                                          [beacon.minor unsignedShortValue]];
         
-        NSString* majorMinor        =   [NSString stringWithFormat:
+            self.majorMinor        =   [NSString stringWithFormat:
                                          @"%i-%i",
                                          [beacon.major unsignedShortValue],
                                          [beacon.minor unsignedShortValue]];
@@ -129,30 +131,28 @@
         //Checking if Key exist
         self.distanceArray = [NSMutableArray array];
         
-        if ([self.beaconDictionary objectForKey:majorMinor])
+        if ([self.beaconDictionary objectForKey:self.majorMinor])
         {
-            self.distanceArray = [self.beaconDictionary objectForKey:majorMinor];
+            self.distanceArray = [self.beaconDictionary objectForKey:self.majorMinor];
             
         }
         
         [self.distanceArray addObject:self.beaconDistance];
         
         if ([self.distanceArray count] > 9 ){
-            [activeBeaconIds addObject:majorMinor];
+            [activeBeaconIds addObject:self.majorMinor];
         }
         
-        [self.beaconDictionary  setObject:self.distanceArray forKey:majorMinor];
+        [self.beaconDictionary  setObject:self.distanceArray forKey:self.majorMinor];
         
     }
     
     
     
-    self.index = 0;
-    
     //Checking if more than 2 Beacons alife.
     if([activeBeaconIds count] > 2)
     {
-        self.position = CGPointMake(150+20, 180+30);
+        self.position = CGPointMake(170, 210);
         self.ball.center = self.position;
         
         
@@ -172,16 +172,26 @@
                 if ([countedSet countForObject:number] > maxCount) {
                     maxCount = [countedSet countForObject:number];
                     maxNumber = number;
-                    NSLog(@" Mein Asymetrischer Mittelwert= %@", maxNumber);
+                    
+                    self.middleValue = [NSMutableArray array];
+                    
+                    self.radiusArray = [NSMutableDictionary dictionary];
+                    
+                    if ([self.radiusArray objectForKey:activeBeaconIds])
+                    {
+                        self.middleValue = [self.radiusArray objectForKey:activeBeaconIds];
+                        
+                    }
+                    
+                    [self.middleValue addObject:maxNumber];
+                    
+                    [self.radiusArray  setObject:self.middleValue forKey:activeBeaconIds];
+                    
                 }
             }
-            
-            
-            
-            
-        
         }
         
+        NSLog(@"Mein DIC= %@", self.radiusArray);
         
         
         
@@ -190,7 +200,7 @@
          Diese funktion wird aufgerufen wenn das Dictionary geleert werden soll!
          */
         [self.beaconDictionary removeAllObjects];
-        NSLog(@"My Dic = %@ ", self.beaconDictionary);
+       // NSLog(@"My Dic = %@ ", self.beaconDictionary);
         NSLog(@"Dictionary wurde geleert");
          
     }

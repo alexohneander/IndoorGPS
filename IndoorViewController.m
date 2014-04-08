@@ -24,19 +24,12 @@
 @property (nonatomic, copy)     NSString*                   parsedUrl;
  */
 
-@property (nonatomic)           NSInteger                   averageArrayIndex;
 @property (nonatomic, strong)   NSMutableDictionary*        beaconDictionary;
 
 @property(nonatomic)            UIImage*                    ballImage;
 @property(nonatomic)            UIImageView*                ball;
 @property(nonatomic, assign)    CGPoint                     position;
-@property(nonatomic)            NSString*                   beaconDistance;
-@property(nonatomic)            NSInteger*                  countDistance;
-@property(nonatomic)            NSInteger                   beaconInteger;
-@property(nonatomic)            NSMutableArray*             distanceArray;
-@property(nonatomic)            NSMutableDictionary*        radiusArray;
-@property(nonatomic)            NSString*                   majorMinor;
-@property(nonatomic)            NSMutableArray*             middleValue;
+@property(nonatomic)            NSMutableDictionary*        radiusDict;
 @end
 
 
@@ -66,7 +59,6 @@
     ///////////Beacon /////////////
     self.beaconDictionary     =   [NSMutableDictionary dictionary];
     
-    self.averageArrayIndex = 0;
     
     /////////////////////////////////////////////////////////////
     // setup Estimote beacon manager
@@ -112,7 +104,7 @@
                                          [beacon.major unsignedShortValue],
                                          [beacon.minor unsignedShortValue]];
         
-            self.majorMinor        =   [NSString stringWithFormat:
+            NSString* majorMinor        =   [NSString stringWithFormat:
                                          @"%i-%i",
                                          [beacon.major unsignedShortValue],
                                          [beacon.minor unsignedShortValue]];
@@ -120,30 +112,30 @@
         
         
         //The working entry
-        self.beaconDistance     =   [NSString stringWithFormat:@"%d",[beacon.distance intValue]];
+        NSString* beaconDistance     =   [NSString stringWithFormat:@"%d",[beacon.distance intValue]];
         
         
         //Label Text
-        self.beaconDistanceOne.text = self.beaconDistance;
+        self.beaconDistanceOne.text = beaconDistance;
         self.distanceLabel.text = labelText;
         
         
         //Checking if Key exist
-        self.distanceArray = [NSMutableArray array];
+        NSMutableArray* distanceArray = [NSMutableArray array];
         
-        if ([self.beaconDictionary objectForKey:self.majorMinor])
+        if ([self.beaconDictionary objectForKey:majorMinor])
         {
-            self.distanceArray = [self.beaconDictionary objectForKey:self.majorMinor];
+            distanceArray = [self.beaconDictionary objectForKey:majorMinor];
             
         }
         
-        [self.distanceArray addObject:self.beaconDistance];
+        [distanceArray addObject:beaconDistance];
         
-        if ([self.distanceArray count] > 9 ){
-            [activeBeaconIds addObject:self.majorMinor];
+        if ([distanceArray count] > 9 ){
+            [activeBeaconIds addObject:majorMinor];
         }
         
-        [self.beaconDictionary  setObject:self.distanceArray forKey:self.majorMinor];
+        [self.beaconDictionary  setObject:distanceArray forKey:majorMinor];
         
     }
     
@@ -158,8 +150,8 @@
         
         for (int i=0; i<[activeBeaconIds count] ; i++)
         {
+            NSLog(@"Beacon-ID: %@", activeBeaconIds[i]);
             NSLog(@"%@", [self.beaconDictionary objectForKey:activeBeaconIds[i]]);
-            
             
             
             
@@ -173,25 +165,16 @@
                     maxCount = [countedSet countForObject:number];
                     maxNumber = number;
                     
-                    self.middleValue = [NSMutableArray array];
-                    
-                    self.radiusArray = [NSMutableDictionary dictionary];
-                    
-                    if ([self.radiusArray objectForKey:activeBeaconIds])
-                    {
-                        self.middleValue = [self.radiusArray objectForKey:activeBeaconIds];
-                        
+                    if (!self.radiusDict) {
+                        self.radiusDict = [NSMutableDictionary dictionary];
                     }
-                    
-                    [self.middleValue addObject:maxNumber];
-                    
-                    [self.radiusArray  setObject:self.middleValue forKey:activeBeaconIds];
+                    [self.radiusDict setObject:maxNumber forKey:activeBeaconIds[i]];
                     
                 }
             }
         }
         
-        NSLog(@"Mein DIC= %@", self.radiusArray);
+        NSLog(@"Mein DIC= %@", self.radiusDict);
         
         
         

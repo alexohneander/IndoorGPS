@@ -17,12 +17,6 @@
 
 @property (nonatomic, strong) ESTBeaconManager*         beaconManager;
 
-/* I dont need this anymore
-@property (nonatomic, strong)   GCDAsyncSocket*             gcdAsync;
-@property (nonatomic, strong)   NSMutableData*              buffer;
-@property (nonatomic, strong)   NSURLConnection*            connection;
-@property (nonatomic, copy)     NSString*                   parsedUrl;
- */
 
 //Calculating
 @property (nonatomic, strong)   NSMutableDictionary*        beaconDictionary;
@@ -37,14 +31,6 @@
 
 
 @implementation IndoorViewController
-
-/* I don`t need this anymore!
- - (void)socket:(GCDAsyncSocket *)sender didConnectToHost:(NSString *)host port:(UInt16)port
- {
- NSLog(@"Cool, I'm connected! That was easy.");
- }
- */
-
 
 
 - (void)viewDidLoad
@@ -77,12 +63,7 @@
     // start looking for estimote beacons in region
     // when beacon ranged beaconManager:didRangeBeacons:inRegion: invoked
     [self.beaconManager startRangingBeaconsInRegion:region];
-    
-    
-    
-    
-    
-    
+  
     
     CGPoint position  = CGPointMake(1,1);
     [self ballAnimation:position];
@@ -104,11 +85,6 @@
     NSMutableArray* activeBeaconIds = [NSMutableArray array];
     for (ESTBeacon* beacon in beacons)
     {
-        //Format Label Text, ID and Distance
-            NSString* labelText         =   [NSString stringWithFormat:
-                                         @"Major: %i, Minor: %i\nRegion: ",
-                                         [beacon.major unsignedShortValue],
-                                         [beacon.minor unsignedShortValue]];
         
             NSString* majorMinor        =   [NSString stringWithFormat:
                                          @"%i-%i",
@@ -119,9 +95,6 @@
         
         //The working entry
         NSString* beaconDistance     =   [NSString stringWithFormat:@"%f",[beacon.distance floatValue]];
-        
-        
-        //Label Text
         
         
         
@@ -136,6 +109,7 @@
         
         [distanceArray addObject:beaconDistance];
         
+        //if more than 9 values in activeBeaconIDs than...
         if ([distanceArray count] > 9 ){
             [activeBeaconIds addObject:majorMinor];
         }
@@ -153,10 +127,7 @@
         
         for (int i=0; i<[activeBeaconIds count] ; i++)
         {
-            //NSLog(@"Beacon-ID: %@", activeBeaconIds[i]);
-            //NSLog(@"%@", [self.beaconDictionary objectForKey:activeBeaconIds[i]]);
-            
-            
+    
             
             NSCountedSet *countedSet = [[NSCountedSet alloc] initWithArray:[self.beaconDictionary objectForKey:activeBeaconIds[i]]];
             
@@ -186,32 +157,32 @@
     
         
         //BeaconID = 9576-49222
-        float beaconOneCoordinateX = 0;
-        float beaconOneCoordinateY = 0;
+        float beaconOneCoordinateX      = 0;
+        float beaconOneCoordinateY      = 0;
         
         //BeaconID = 42634-3111
-        float beaconTwoCoordinateX = 320;
-        float beaconTwoCoordinateY = 0;
+        float beaconTwoCoordinateX      = 320;
+        float beaconTwoCoordinateY      = 0;
         
         // BeaconID = 30219-54563
-        float beaconThreeCoordinateX = 160;
-        float beaconThreeCoordinateY = 480;
+        float beaconThreeCoordinateX    = 160;
+        float beaconThreeCoordinateY    = 480;
 
         
-        //Umrechnung                            *1 = Factor cm to Pixel
-        BeaconDistanceOne   = (BeaconDistanceOne * 100) *1;
-        BeaconDistanceTwo   = (BeaconDistanceTwo * 100) *1;
-        BeaconDistanceThree = (BeaconDistanceThree * 100) *1;
+        //Calculating Distances with Factor (cm to Pixel)   *1 = Factor cm to Pixel
+        BeaconDistanceOne   = (BeaconDistanceOne * 100)     *1;
+        BeaconDistanceTwo   = (BeaconDistanceTwo * 100)     *1;
+        BeaconDistanceThree = (BeaconDistanceThree * 100)   *1;
         
         
-        //FormelZeichenBerechnung
+        //Calculating Delta Alpha Beta
         float Delta   = 4 * ((beaconOneCoordinateX - beaconTwoCoordinateX) * (beaconOneCoordinateY - beaconThreeCoordinateY) - (beaconOneCoordinateX - beaconThreeCoordinateX) * (beaconOneCoordinateY - beaconTwoCoordinateY));
         float Alpha   = (BeaconDistanceTwo * BeaconDistanceTwo) - (BeaconDistanceOne * BeaconDistanceOne) - (beaconTwoCoordinateX * beaconTwoCoordinateX) + (beaconOneCoordinateX * beaconOneCoordinateX) - (beaconTwoCoordinateY * beaconTwoCoordinateY) + (beaconOneCoordinateY * beaconOneCoordinateY);
         float Beta    = (BeaconDistanceThree * BeaconDistanceThree) - (BeaconDistanceOne * BeaconDistanceOne) - (beaconThreeCoordinateX * beaconThreeCoordinateX) + (beaconOneCoordinateX * beaconOneCoordinateX) - (beaconThreeCoordinateY * beaconThreeCoordinateY) + (beaconOneCoordinateY * beaconOneCoordinateY);
         
         
         
-        // Eigentliche Rechnung
+        //Real Calculating the Position (Triletaration
         float PositionX = (1/Delta) * (2 * Alpha * (beaconOneCoordinateY - beaconThreeCoordinateY) - 2 * Beta * (beaconOneCoordinateY - beaconTwoCoordinateY));
         float PositionY = (1/Delta) * (2 * Beta * (beaconOneCoordinateX - beaconTwoCoordinateX) - 2 * Alpha * (beaconOneCoordinateX - beaconThreeCoordinateX));
         
@@ -235,22 +206,13 @@
         self.ball.center = self.position;
         
         
-        
-        
-        
-        
-        
         /*
-         Diese funktion wird aufgerufen wenn das Dictionary geleert werden soll!
+         Deleting Values from Dictionary
          */
         [self.beaconDictionary removeAllObjects];
-       // NSLog(@"My Dic = %@ ", self.beaconDictionary);
-        NSLog(@"Dictionary wurde geleert");
+        NSLog(@"Dictionary Release");
          
     }
-    
-    
-    
     
     
 }

@@ -202,9 +202,9 @@
 
         
         //Umrechnung
-        BeaconDistanceOne   = (BeaconDistanceOne * 100) /2.5;
-        BeaconDistanceTwo   = (BeaconDistanceTwo * 100) /2.5;
-        BeaconDistanceThree = (BeaconDistanceThree * 100) /2.5;
+        BeaconDistanceOne   = (BeaconDistanceOne * 100) *1;
+        BeaconDistanceTwo   = (BeaconDistanceTwo * 100) *1;
+        BeaconDistanceThree = (BeaconDistanceThree * 100) *1;
         
         NSLog(@"BeaconDistanceOne = %f", BeaconDistanceOne);
         NSLog(@"BeaconDistanceTwo = %f", BeaconDistanceTwo);

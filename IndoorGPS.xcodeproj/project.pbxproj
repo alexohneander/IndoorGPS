@@ -33,6 +33,8 @@
 		CDDAC30F189F9773002298E6 /* libEstimoteSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC30E189F9773002298E6 /* libEstimoteSDK.a */; };
 		CDDAC314189F9799002298E6 /* IndoorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDAC312189F9799002298E6 /* IndoorViewController.m */; };
 		CDDAC315189F9799002298E6 /* IndoorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDDAC313189F9799002298E6 /* IndoorViewController.xib */; };
+		CDDEA9FA18F69A0B00E65407 /* positionPoint.png in Resources */ = {isa = PBXBuildFile; fileRef = CDDEA9F918F69A0B00E65407 /* positionPoint.png */; };
+		CDDEA9FB18F69A0B00E65407 /* positionPoint.png in Resources */ = {isa = PBXBuildFile; fileRef = CDDEA9F918F69A0B00E65407 /* positionPoint.png */; };
 		CDEB6BEC18BB8C1000AA6DC4 /* IM-IndoorGPS.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEB6BEB18BB8C1000AA6DC4 /* IM-IndoorGPS.png */; };
 		CDEB6BED18BB8C1000AA6DC4 /* IM-IndoorGPS.png in Resources */ = {isa = PBXBuildFile; fileRef = CDEB6BEB18BB8C1000AA6DC4 /* IM-IndoorGPS.png */; };
 		CDF1054D18BE31B200A412A6 /* test-ball.png in Resources */ = {isa = PBXBuildFile; fileRef = CDF1054C18BE31B200A412A6 /* test-ball.png */; };
@@ -88,6 +90,7 @@
 		CDDAC311189F9799002298E6 /* IndoorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndoorViewController.h; sourceTree = "<group>"; };
 		CDDAC312189F9799002298E6 /* IndoorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndoorViewController.m; sourceTree = "<group>"; };
 		CDDAC313189F9799002298E6 /* IndoorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndoorViewController.xib; sourceTree = "<group>"; };
+		CDDEA9F918F69A0B00E65407 /* positionPoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = positionPoint.png; sourceTree = "<group>"; };
 		CDEB6BEB18BB8C1000AA6DC4 /* IM-IndoorGPS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IM-IndoorGPS.png"; sourceTree = "<group>"; };
 		CDF1054C18BE31B200A412A6 /* test-ball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "test-ball.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,6 +205,7 @@
 		CDDAC2E2189F9707002298E6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CDDEA9F918F69A0B00E65407 /* positionPoint.png */,
 				CDF1054C18BE31B200A412A6 /* test-ball.png */,
 				CDEB6BEB18BB8C1000AA6DC4 /* IM-IndoorGPS.png */,
 				CDDAC2E3189F9707002298E6 /* IndoorGPSTests-Info.plist */,
@@ -321,6 +325,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDDEA9FA18F69A0B00E65407 /* positionPoint.png in Resources */,
 				CDDAC2CD189F9706002298E6 /* InfoPlist.strings in Resources */,
 				CDEB6BEC18BB8C1000AA6DC4 /* IM-IndoorGPS.png in Resources */,
 				CDDAC305189F9752002298E6 /* Documentation.html in Resources */,
@@ -337,6 +342,7 @@
 				CDDAC2E6189F9707002298E6 /* InfoPlist.strings in Resources */,
 				CDF1054E18BE31B200A412A6 /* test-ball.png in Resources */,
 				CDEB6BED18BB8C1000AA6DC4 /* IM-IndoorGPS.png in Resources */,
+				CDDEA9FB18F69A0B00E65407 /* positionPoint.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

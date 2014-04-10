@@ -24,12 +24,15 @@
 @property (nonatomic, copy)     NSString*                   parsedUrl;
  */
 
+//Calculating
 @property (nonatomic, strong)   NSMutableDictionary*        beaconDictionary;
+@property(nonatomic)            NSMutableDictionary*        radiusDict;
 
+//Moving Image (Map)
 @property(nonatomic)            UIImage*                    ballImage;
 @property(nonatomic)            UIImageView*                ball;
 @property(nonatomic, assign)    CGPoint                     position;
-@property(nonatomic)            NSMutableDictionary*        radiusDict;
+
 @end
 
 
@@ -49,7 +52,7 @@
     [super viewDidLoad];
 	
     //Animation (Test Ball)//
-    UIImage *ballImage = [UIImage imageNamed:@"test-ball"];
+    UIImage *ballImage = [UIImage imageNamed:@"positionPoint.png"];
     self.ball = [[UIImageView alloc] initWithImage:ballImage];
     [self.view addSubview:self.ball];
     
@@ -78,6 +81,9 @@
     
     
     
+    
+    
+    
     CGPoint position  = CGPointMake(1,1);
     [self ballAnimation:position];
     
@@ -99,7 +105,7 @@
     for (ESTBeacon* beacon in beacons)
     {
         //Format Label Text, ID and Distance
-        NSString* labelText         =   [NSString stringWithFormat:
+            NSString* labelText         =   [NSString stringWithFormat:
                                          @"Major: %i, Minor: %i\nRegion: ",
                                          [beacon.major unsignedShortValue],
                                          [beacon.minor unsignedShortValue]];
@@ -116,8 +122,7 @@
         
         
         //Label Text
-        self.beaconDistanceOne.text = beaconDistance;
-        self.distanceLabel.text = labelText;
+        
         
         
         //Checking if Key exist
@@ -144,14 +149,12 @@
     //Checking if more than 2 Beacons alife.
     if([activeBeaconIds count] > 2)
     {
-        self.position = CGPointMake(170, 210);
-        self.ball.center = self.position;
         
         
         for (int i=0; i<[activeBeaconIds count] ; i++)
         {
-            NSLog(@"Beacon-ID: %@", activeBeaconIds[i]);
-            NSLog(@"%@", [self.beaconDictionary objectForKey:activeBeaconIds[i]]);
+            //NSLog(@"Beacon-ID: %@", activeBeaconIds[i]);
+            //NSLog(@"%@", [self.beaconDictionary objectForKey:activeBeaconIds[i]]);
             
             
             
@@ -174,7 +177,74 @@
             }
         }
         
-        NSLog(@"Mein DIC= %@", self.radiusDict);
+        
+        NSLog(@"Mein DIC= %@", self.radiusDict[@"42634-3111"]);
+        
+        float BeaconDistanceOne   = [self.radiusDict[@"9576-49222"]   intValue];
+        float BeaconDistanceTwo   = [self.radiusDict[@"42634-3111"]   intValue];
+        float BeaconDistanceThree = [self.radiusDict[@"30219-54563"]  intValue];
+        
+        NSLog(@"Distans 1: %@", self.radiusDict[@"9576-49222"]);
+        NSLog(@"Distans 2: %@", self.radiusDict[@"42634-3111"]);
+        NSLog(@"Distans 3: %@", self.radiusDict[@"30219-54563"]);
+        
+        //BeaconID = 9576-49222
+        float beaconOneCoordinateX = 0;
+        float beaconOneCoordinateY = 0;
+        
+        //BeaconID = 42634-3111
+        float beaconTwoCoordinateX = 320;
+        float beaconTwoCoordinateY = 0;
+        
+        // BeaconID = 30219-54563
+        float beaconThreeCoordinateX = 160;
+        float beaconThreeCoordinateY = 480;
+
+        
+        //Umrechnung
+        BeaconDistanceOne   = (BeaconDistanceOne * 100) /2.5;
+        BeaconDistanceTwo   = (BeaconDistanceTwo * 100) /2.5;
+        BeaconDistanceThree = (BeaconDistanceThree * 100) /2.5;
+        
+        NSLog(@"BeaconDistanceOne = %f", BeaconDistanceOne);
+        NSLog(@"BeaconDistanceTwo = %f", BeaconDistanceTwo);
+        NSLog(@"BeaconDistanceThree = %f", BeaconDistanceThree);
+        
+        //FormelZeichenBerechnung
+        float Delta   = 4 * ((beaconOneCoordinateX - beaconTwoCoordinateX) * (beaconOneCoordinateY - beaconThreeCoordinateY) - (beaconOneCoordinateX - beaconThreeCoordinateX) * (beaconOneCoordinateY - beaconTwoCoordinateY));
+        float Alpha   = (BeaconDistanceTwo * BeaconDistanceTwo) - (BeaconDistanceOne * BeaconDistanceOne) - (beaconTwoCoordinateX * beaconTwoCoordinateX) + (beaconOneCoordinateX * beaconOneCoordinateX) - (beaconTwoCoordinateY * beaconTwoCoordinateY) + (beaconOneCoordinateY * beaconOneCoordinateY);
+        float Beta    = (BeaconDistanceThree * BeaconDistanceThree) - (BeaconDistanceOne * BeaconDistanceOne) - (beaconThreeCoordinateX * beaconThreeCoordinateX) + (beaconOneCoordinateX * beaconOneCoordinateX) - (beaconThreeCoordinateY * beaconThreeCoordinateY) + (beaconOneCoordinateY * beaconOneCoordinateY);
+        
+        NSLog(@"Delta= %f", Delta);
+        NSLog(@"Alpha = %f", Alpha);
+        NSLog(@"Beta = %f", Beta);
+        
+        
+        // Eigentliche Rechnung
+        float PositionX = (1/Delta) * (2 * Alpha * (beaconOneCoordinateY - beaconThreeCoordinateY) - 2 * Beta * (beaconOneCoordinateY - beaconTwoCoordinateY));
+        float PositionY = (1/Delta) * (2 * Beta * (beaconOneCoordinateX - beaconTwoCoordinateX) - 2 * Alpha * (beaconOneCoordinateX - beaconThreeCoordinateX));
+        
+        
+        NSLog(@"PositionX = %f", PositionX);
+        NSLog(@"PositionX = %f", PositionY);
+        
+        NSString* PositionStringX = [NSString stringWithFormat:
+                                     @"%f",
+                                     PositionX];
+        NSString* PositionStringY = [NSString stringWithFormat:
+                                     @"%f",
+                                     PositionY];
+        
+    
+        self.beaconDistanceOne.text     = PositionStringX;
+        self.distanceLabel.text         = PositionStringY;
+        
+        
+        self.position = CGPointMake(PositionX, PositionY);
+        self.ball.center = self.position;
+        
+        
+        
         
         
         

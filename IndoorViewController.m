@@ -9,37 +9,58 @@
 #import "IndoorViewController.h"
 #import "ESTBeaconManager.h"
 
+//Animation (Test Ball)//
+#import <QuartzCore/QuartzCore.h>
+//Animation (Test Ball)//
+
 @interface IndoorViewController () <ESTBeaconManagerDelegate>
 
-@property (nonatomic, strong) ESTBeaconManager* beaconManager;
-@property (nonatomic, strong) ESTBeacon* selectedBeacon;
-@property (nonatomic, strong) ESTBeacon* selectedBeaconTwo;
-@property (nonatomic, strong) ESTBeacon* selectedBeaconThree;
-@property (nonatomic, strong) NSMutableData   *buffer;
-@property (nonatomic, strong) NSURLConnection *connection;
-@property (nonatomic, strong) GCDAsyncSocket  *gcdAsync;
-@property (nonatomic, copy)   NSDictionary    *keyDictionary;
-@property (nonatomic, copy)   NSString        *parsedUrl;
-@property (nonatomic)         NSInteger       averageArrayIndex;
-//@property (nonatomic, copy)   NSMutableArray  *beaconArrayOne;
+@property (nonatomic, strong) ESTBeaconManager*         beaconManager;
+
+/* I dont need this anymore
+@property (nonatomic, strong)   GCDAsyncSocket*             gcdAsync;
+@property (nonatomic, strong)   NSMutableData*              buffer;
+@property (nonatomic, strong)   NSURLConnection*            connection;
+@property (nonatomic, copy)     NSString*                   parsedUrl;
+ */
+
+//Calculating
+@property (nonatomic, strong)   NSMutableDictionary*        beaconDictionary;
+@property(nonatomic)            NSMutableDictionary*        radiusDict;
+
+//Moving Image (Map)
+@property(nonatomic)            UIImage*                    ballImage;
+@property(nonatomic)            UIImageView*                ball;
+@property(nonatomic, assign)    CGPoint                     position;
+
 @end
+
 
 @implementation IndoorViewController
 
+/* I don`t need this anymore!
+ - (void)socket:(GCDAsyncSocket *)sender didConnectToHost:(NSString *)host port:(UInt16)port
+ {
+ NSLog(@"Cool, I'm connected! That was easy.");
+ }
+ */
 
-- (void)socket:(GCDAsyncSocket *)sender didConnectToHost:(NSString *)host port:(UInt16)port
-{
-    NSLog(@"Cool, I'm connected! That was easy.");
-}
+
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	
+    //Animation (Test Ball)//
+    UIImage *ballImage = [UIImage imageNamed:@"positionPoint.png"];
+    self.ball = [[UIImageView alloc] initWithImage:ballImage];
+    [self.view addSubview:self.ball];
     
-    [self readPlist];
+    //Animation (Test Ball)//
     
     
+    ///////////Beacon /////////////
+    self.beaconDictionary     =   [NSMutableDictionary dictionary];
     
     
     /////////////////////////////////////////////////////////////
@@ -56,272 +77,184 @@
     // start looking for estimote beacons in region
     // when beacon ranged beaconManager:didRangeBeacons:inRegion: invoked
     [self.beaconManager startRangingBeaconsInRegion:region];
+    
+    
+    
+    
+    
+    
+    
+    CGPoint position  = CGPointMake(1,1);
+    [self ballAnimation:position];
+    
+    
 }
 
-
-
-
+- (void)ballAnimation:(CGPoint)position{
+    position.x = 0;
+    position.y = 1000;
+    self.ball.center = position;
+}
 
 
 -(void)beaconManager:(ESTBeaconManager *)manager
      didRangeBeacons:(NSArray *)beacons
             inRegion:(ESTBeaconRegion *)region
 {
-    NSMutableArray* beaconArrayOne     =   [[NSMutableArray alloc] initWithCapacity:5];
-    NSMutableArray* beaconArrayTwo     =   [[NSMutableArray alloc] initWithCapacity:5];
-    NSMutableArray* beaconArrayThree   =   [[NSMutableArray alloc] initWithCapacity:5];
-    
-    //IF for Beacon One
-    if([beacons count] > 0)
+    NSMutableArray* activeBeaconIds = [NSMutableArray array];
+    for (ESTBeacon* beacon in beacons)
     {
-        // initialy pick closest beacon
-        self.selectedBeacon = [beacons objectAtIndex:0];
+        //Format Label Text, ID and Distance
+            NSString* labelText         =   [NSString stringWithFormat:
+                                         @"Major: %i, Minor: %i\nRegion: ",
+                                         [beacon.major unsignedShortValue],
+                                         [beacon.minor unsignedShortValue]];
         
-        NSString *selectedBeaconOne = [NSString stringWithFormat:
-                                       @"B.One: %@",
-                                       [beacons objectAtIndex:0]];
+            NSString* majorMinor        =   [NSString stringWithFormat:
+                                         @"%i-%i",
+                                         [beacon.major unsignedShortValue],
+                                         [beacon.minor unsignedShortValue]];
         
-        NSLog(@"B.One: %@", selectedBeaconOne);
-        self.beaconLabelOne.text = selectedBeaconOne;
-    }
-    
-    
-    //IF for Beacon Two
-    if([beacons count] > 1)
-    {
-        // initialy pick closest beacon
-        self.selectedBeaconTwo = [beacons objectAtIndex:1];
         
-        NSString *selectedBeaconOne = [NSString stringWithFormat:
-                                       @"B.Two: %@",
-                                       [beacons objectAtIndex:1]];
         
-        NSLog(@"B.Two: %@", selectedBeaconOne);
-        self.beaconLabelTwo.text = selectedBeaconOne;
-    }
-    
-    
-    //IF for Beacon Three
-    if([beacons count] > 2)
-    {
-        // initialy pick closest beacon
-        self.selectedBeaconThree = [beacons objectAtIndex:2];
+        //The working entry
+        NSString* beaconDistance     =   [NSString stringWithFormat:@"%f",[beacon.distance floatValue]];
         
-        NSString *selectedBeaconThree = [NSString stringWithFormat:
-                                         @"B.Three: %@",
-                                         [beacons objectAtIndex:2]];
         
-        NSLog(@"B.Two: %@", selectedBeaconThree);
-        self.beaconLabelThree.text = selectedBeaconThree;
-    }
-    
-    ///////////////////////////////Beacon One/////////////////////////////////////
-    // Beacon Postion!
-    // beacon array is sorted based on distanceˆ
-    // closest beacon is the first one
-    NSString* labelText = [NSString stringWithFormat:
-                           @"Major: %i, Minor: %i\nRegion: ",
-                           [self.selectedBeacon.major unsignedShortValue],
-                           [self.selectedBeacon.minor unsignedShortValue]];
-    
-    
-    // Make key from Major + Minor
-    NSString *MajorMinor = [NSString stringWithFormat:
-                            @"%i-%i",
-                            [self.selectedBeacon.major unsignedShortValue],
-                            [self.selectedBeacon.minor unsignedShortValue]];
-    NSLog(@"NSString = %@", MajorMinor);
-    
-    // Starting Compare Plist
-    [self comparePlist:(NSString*)MajorMinor withArray:self.keyDictionary];
-    
-    
-    // Calculate the distance from Beacon
-    NSString* beaconDistanceOne = [NSString stringWithFormat:
-                                   @"Distance: %i",
-                                   [self.selectedBeacon.distance intValue]];
-    NSLog(@"Nsstring = %@", beaconDistanceOne);
-    self.beaconDistanceOne.text = beaconDistanceOne;
-    
-    
-    // My Postion!
-    // calculate and set new y position
-    switch (self.selectedBeacon.proximity)
-    {
-        case CLProximityUnknown:
-            labelText = [labelText stringByAppendingString: @"Unknown"];
-            break;
-        case CLProximityImmediate:
-            labelText = [labelText stringByAppendingString: @"Sehr Nah"];
-        case CLProximityNear:
-            labelText = [labelText stringByAppendingString: @"in Sichtweite"];
-            break;
-        case CLProximityFar:
-            labelText = [labelText stringByAppendingString: @"Weg"];
-            break;
+        //Label Text
+        
+        
+        
+        //Checking if Key exist
+        NSMutableArray* distanceArray = [NSMutableArray array];
+        
+        if ([self.beaconDictionary objectForKey:majorMinor])
+        {
+            distanceArray = [self.beaconDictionary objectForKey:majorMinor];
             
-        default:
-            break;
+        }
+        
+        [distanceArray addObject:beaconDistance];
+        
+        if ([distanceArray count] > 9 ){
+            [activeBeaconIds addObject:majorMinor];
+        }
+        
+        [self.beaconDictionary  setObject:distanceArray forKey:majorMinor];
+        
     }
     
-    self.distanceLabel.text = labelText;
-    ///////////////////////////////Beacon One/////////////////////////////////////
+    NSLog(@"Beacon Distanzen: %@", self.beaconDictionary);
     
-    
-    
-    ///////////////////////////////Beacon Two/////////////////////////////////////
-    // Beacon Postion!
-    // beacon array is sorted based on distanceˆ
-    // closest beacon is the first one
-    NSString* labelTextTwo = [NSString stringWithFormat:
-                              @"Major: %i, Minor: %i\nRegion: ",
-                              [self.selectedBeaconTwo.major unsignedShortValue],
-                              [self.selectedBeaconTwo.minor unsignedShortValue]];
-    
-    
-    // Make key from Major + Minor
-    NSString *MajorMinorTwo = [NSString stringWithFormat:
-                               @"%i-%i",
-                               [self.selectedBeaconTwo.major unsignedShortValue],
-                               [self.selectedBeaconTwo.minor unsignedShortValue]];
-    NSLog(@"NSString = %@", MajorMinorTwo);
-    
-    // Starting Compare Plist
-    [self comparePlist:(NSString*)MajorMinorTwo withArray:self.keyDictionary];
-    
-    
-    // Calculate the distance from Beacon
-    NSString* beaconDistanceTwo = [NSString stringWithFormat:
-                                   @"Distance: %i",
-                                   [self.selectedBeaconTwo.distance intValue]];
-    NSLog(@"Nsstring = %@", beaconDistanceTwo);
-    self.beaconDistanceTwo.text = beaconDistanceTwo;
-    
-    
-    
-    
-    // My Postion!
-    // calculate and set new y position
-    switch (self.selectedBeaconTwo.proximity)
+    //Checking if more than 2 Beacons alife.
+    if([activeBeaconIds count] > 2)
     {
-        case CLProximityUnknown:
-            labelTextTwo = [labelTextTwo stringByAppendingString: @"Unknown"];
-            break;
-        case CLProximityImmediate:
-            labelTextTwo = [labelTextTwo stringByAppendingString: @"Sehr Nah"];
-        case CLProximityNear:
-            labelTextTwo = [labelTextTwo stringByAppendingString: @"in Sichtweite"];
-            break;
-        case CLProximityFar:
-            labelTextTwo = [labelTextTwo stringByAppendingString: @"Weg"];
-            break;
+        
+        
+        for (int i=0; i<[activeBeaconIds count] ; i++)
+        {
+            //NSLog(@"Beacon-ID: %@", activeBeaconIds[i]);
+            //NSLog(@"%@", [self.beaconDictionary objectForKey:activeBeaconIds[i]]);
             
-        default:
-            break;
+            
+            
+            NSCountedSet *countedSet = [[NSCountedSet alloc] initWithArray:[self.beaconDictionary objectForKey:activeBeaconIds[i]]];
+            
+            NSInteger maxCount = 0;
+            NSNumber *maxNumber;
+            
+            for (NSNumber *number in countedSet) {
+                if ([countedSet countForObject:number] > maxCount) {
+                    maxCount = [countedSet countForObject:number];
+                    maxNumber = number;
+                    
+                    if (!self.radiusDict) {
+                        self.radiusDict = [NSMutableDictionary dictionary];
+                    }
+                    [self.radiusDict setObject:maxNumber forKey:activeBeaconIds[i]];
+                    
+                }
+            }
+        }
+        
+        
+        NSLog(@"Mein DIC= %@", self.radiusDict[@"42634-3111"]);
+        
+        float BeaconDistanceOne   = [self.radiusDict[@"9576-49222"]   floatValue];
+        float BeaconDistanceTwo   = [self.radiusDict[@"42634-3111"]   floatValue];
+        float BeaconDistanceThree = [self.radiusDict[@"30219-54563"]  floatValue];
+    
+        
+        //BeaconID = 9576-49222
+        float beaconOneCoordinateX = 0;
+        float beaconOneCoordinateY = 0;
+        
+        //BeaconID = 42634-3111
+        float beaconTwoCoordinateX = 320;
+        float beaconTwoCoordinateY = 0;
+        
+        // BeaconID = 30219-54563
+        float beaconThreeCoordinateX = 160;
+        float beaconThreeCoordinateY = 480;
+
+        
+        //Umrechnung                            *1 = Factor cm to Pixel
+        BeaconDistanceOne   = (BeaconDistanceOne * 100) *1;
+        BeaconDistanceTwo   = (BeaconDistanceTwo * 100) *1;
+        BeaconDistanceThree = (BeaconDistanceThree * 100) *1;
+        
+        
+        //FormelZeichenBerechnung
+        float Delta   = 4 * ((beaconOneCoordinateX - beaconTwoCoordinateX) * (beaconOneCoordinateY - beaconThreeCoordinateY) - (beaconOneCoordinateX - beaconThreeCoordinateX) * (beaconOneCoordinateY - beaconTwoCoordinateY));
+        float Alpha   = (BeaconDistanceTwo * BeaconDistanceTwo) - (BeaconDistanceOne * BeaconDistanceOne) - (beaconTwoCoordinateX * beaconTwoCoordinateX) + (beaconOneCoordinateX * beaconOneCoordinateX) - (beaconTwoCoordinateY * beaconTwoCoordinateY) + (beaconOneCoordinateY * beaconOneCoordinateY);
+        float Beta    = (BeaconDistanceThree * BeaconDistanceThree) - (BeaconDistanceOne * BeaconDistanceOne) - (beaconThreeCoordinateX * beaconThreeCoordinateX) + (beaconOneCoordinateX * beaconOneCoordinateX) - (beaconThreeCoordinateY * beaconThreeCoordinateY) + (beaconOneCoordinateY * beaconOneCoordinateY);
+        
+        
+        
+        // Eigentliche Rechnung
+        float PositionX = (1/Delta) * (2 * Alpha * (beaconOneCoordinateY - beaconThreeCoordinateY) - 2 * Beta * (beaconOneCoordinateY - beaconTwoCoordinateY));
+        float PositionY = (1/Delta) * (2 * Beta * (beaconOneCoordinateX - beaconTwoCoordinateX) - 2 * Alpha * (beaconOneCoordinateX - beaconThreeCoordinateX));
+        
+        
+        NSLog(@"PositionX = %f", PositionX);
+        NSLog(@"PositionX = %f", PositionY);
+        
+        NSString* PositionStringX = [NSString stringWithFormat:
+                                     @"%f",
+                                     PositionX];
+        NSString* PositionStringY = [NSString stringWithFormat:
+                                     @"%f",
+                                     PositionY];
+        
+    
+        self.beaconDistanceOne.text     = PositionStringX;
+        self.distanceLabel.text         = PositionStringY;
+        
+        
+        self.position = CGPointMake(PositionX, PositionY);
+        self.ball.center = self.position;
+        
+        
+        
+        
+        
+        
+        
+        /*
+         Diese funktion wird aufgerufen wenn das Dictionary geleert werden soll!
+         */
+        [self.beaconDictionary removeAllObjects];
+       // NSLog(@"My Dic = %@ ", self.beaconDictionary);
+        NSLog(@"Dictionary wurde geleert");
+         
     }
     
-    self.distanceLabelTwo.text = labelTextTwo;
-    ///////////////////////////////Beacon Two/////////////////////////////////////
     
     
-    
-    ///////////////////////////////Beacon Three/////////////////////////////////////
-    // Beacon Postion!
-    // beacon array is sorted based on distanceˆ
-    // closest beacon is the first one
-    NSString* labelTextThree = [NSString stringWithFormat:
-                                @"Major: %i, Minor: %i\nRegion: ",
-                                [self.selectedBeaconThree.major unsignedShortValue],
-                                [self.selectedBeaconThree.minor unsignedShortValue]];
-    
-    
-    // Make key from Major + Minor
-    NSString *MajorMinorThree = [NSString stringWithFormat:
-                                 @"%i-%i",
-                                 [self.selectedBeaconThree.major unsignedShortValue],
-                                 [self.selectedBeaconThree.minor unsignedShortValue]];
-    NSLog(@"NSString = %@", MajorMinorThree);
-    
-    // Starting Compare Plist
-    [self comparePlist:(NSString*)MajorMinorThree withArray:self.keyDictionary];
-    
-    
-    // Calculate the distance from Beacon
-    NSString* beaconDistanceThree = [NSString stringWithFormat:
-                                     @"Distance: %i",
-                                     [self.selectedBeaconThree.distance intValue]];
-    NSLog(@"Nsstring = %@", beaconDistanceThree);
-    self.beaconDistanceThree.text = beaconDistanceThree;
-    
-    
-    
-    // My Postion!
-    // calculate and set new y position
-    switch (self.selectedBeaconThree.proximity)
-    {
-        case CLProximityUnknown:
-            labelTextThree = [labelTextThree stringByAppendingString: @"Unknown"];
-            break;
-        case CLProximityImmediate:
-            labelTextThree = [labelTextThree stringByAppendingString: @"Sehr Nah"];
-        case CLProximityNear:
-            labelTextThree = [labelTextThree stringByAppendingString: @"in Sichtweite"];
-            break;
-        case CLProximityFar:
-            labelTextThree = [labelTextThree stringByAppendingString: @"Weg"];
-            break;
-            
-        default:
-            break;
-    }
-    
-    self.distanceLabelThree.text = labelTextThree;
-    ///////////////////////////////Beacon Three/////////////////////////////////////
-    
-    
-    [beaconArrayOne insertObject:beaconDistanceOne atIndex: self.averageArrayIndex];
-    NSLog(@"ArrayOne = %@", beaconArrayOne);
-    
-    [beaconArrayTwo insertObject:beaconDistanceTwo atIndex: self.averageArrayIndex];
-    NSLog(@"ArrayTwo = %@", beaconArrayTwo);
-    
-    [beaconArrayThree insertObject:beaconDistanceThree atIndex: self.averageArrayIndex];
-    NSLog(@"ArrayThree = %@", beaconArrayThree);
-    
-}
-
-
-
-
-
-
-
-
-
-
-// Reading Plist.
--(void) readPlist
-{
-    NSDictionary *keyDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"beaconLockMap" ofType:@"plist"]];
-    NSLog(@"dictionary = %@", keyDictionary);
-    self.keyDictionary = keyDictionary;
     
     
 }
 
-// Comparing Plist with Major + Minor.
--(void) comparePlist:(NSString*)MajorMinor withArray:(NSDictionary*)keyDictionary
-{
-    
-    if ([keyDictionary objectForKey: MajorMinor])
-    {
-        NSLog(@"compare Done!");
-        NSString *compareUrl = [keyDictionary valueForKey: MajorMinor];
-        NSLog(@"KeyValue = %@", compareUrl);
-        self.parsedUrl = compareUrl;
-    }
-    
-}
 
 
 - (void)didReceiveMemoryWarning

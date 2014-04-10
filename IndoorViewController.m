@@ -183,10 +183,7 @@
         float BeaconDistanceOne   = [self.radiusDict[@"9576-49222"]   floatValue];
         float BeaconDistanceTwo   = [self.radiusDict[@"42634-3111"]   floatValue];
         float BeaconDistanceThree = [self.radiusDict[@"30219-54563"]  floatValue];
-        
-       // NSLog(@"Distans 1: %@", self.radiusDict[@"9576-49222"]);
-       // NSLog(@"Distans 2: %@", self.radiusDict[@"42634-3111"]);
-       // NSLog(@"Distans 3: %@", self.radiusDict[@"30219-54563"]);
+    
         
         //BeaconID = 9576-49222
         float beaconOneCoordinateX = 0;
@@ -201,7 +198,7 @@
         float beaconThreeCoordinateY = 480;
 
         
-        //Umrechnung
+        //Umrechnung                            *1 = Factor cm to Pixel
         BeaconDistanceOne   = (BeaconDistanceOne * 100) *1;
         BeaconDistanceTwo   = (BeaconDistanceTwo * 100) *1;
         BeaconDistanceThree = (BeaconDistanceThree * 100) *1;

@@ -118,7 +118,7 @@
         
         
         //The working entry
-        NSString* beaconDistance     =   [NSString stringWithFormat:@"%d",[beacon.distance intValue]];
+        NSString* beaconDistance     =   [NSString stringWithFormat:@"%f",[beacon.distance floatValue]];
         
         
         //Label Text
@@ -144,7 +144,7 @@
         
     }
     
-    
+    NSLog(@"Beacon Distanzen: %@", self.beaconDictionary);
     
     //Checking if more than 2 Beacons alife.
     if([activeBeaconIds count] > 2)
@@ -180,13 +180,13 @@
         
         NSLog(@"Mein DIC= %@", self.radiusDict[@"42634-3111"]);
         
-        float BeaconDistanceOne   = [self.radiusDict[@"9576-49222"]   intValue];
-        float BeaconDistanceTwo   = [self.radiusDict[@"42634-3111"]   intValue];
-        float BeaconDistanceThree = [self.radiusDict[@"30219-54563"]  intValue];
+        float BeaconDistanceOne   = [self.radiusDict[@"9576-49222"]   floatValue];
+        float BeaconDistanceTwo   = [self.radiusDict[@"42634-3111"]   floatValue];
+        float BeaconDistanceThree = [self.radiusDict[@"30219-54563"]  floatValue];
         
-        NSLog(@"Distans 1: %@", self.radiusDict[@"9576-49222"]);
-        NSLog(@"Distans 2: %@", self.radiusDict[@"42634-3111"]);
-        NSLog(@"Distans 3: %@", self.radiusDict[@"30219-54563"]);
+       // NSLog(@"Distans 1: %@", self.radiusDict[@"9576-49222"]);
+       // NSLog(@"Distans 2: %@", self.radiusDict[@"42634-3111"]);
+       // NSLog(@"Distans 3: %@", self.radiusDict[@"30219-54563"]);
         
         //BeaconID = 9576-49222
         float beaconOneCoordinateX = 0;
@@ -206,18 +206,12 @@
         BeaconDistanceTwo   = (BeaconDistanceTwo * 100) *1;
         BeaconDistanceThree = (BeaconDistanceThree * 100) *1;
         
-        NSLog(@"BeaconDistanceOne = %f", BeaconDistanceOne);
-        NSLog(@"BeaconDistanceTwo = %f", BeaconDistanceTwo);
-        NSLog(@"BeaconDistanceThree = %f", BeaconDistanceThree);
         
         //FormelZeichenBerechnung
         float Delta   = 4 * ((beaconOneCoordinateX - beaconTwoCoordinateX) * (beaconOneCoordinateY - beaconThreeCoordinateY) - (beaconOneCoordinateX - beaconThreeCoordinateX) * (beaconOneCoordinateY - beaconTwoCoordinateY));
         float Alpha   = (BeaconDistanceTwo * BeaconDistanceTwo) - (BeaconDistanceOne * BeaconDistanceOne) - (beaconTwoCoordinateX * beaconTwoCoordinateX) + (beaconOneCoordinateX * beaconOneCoordinateX) - (beaconTwoCoordinateY * beaconTwoCoordinateY) + (beaconOneCoordinateY * beaconOneCoordinateY);
         float Beta    = (BeaconDistanceThree * BeaconDistanceThree) - (BeaconDistanceOne * BeaconDistanceOne) - (beaconThreeCoordinateX * beaconThreeCoordinateX) + (beaconOneCoordinateX * beaconOneCoordinateX) - (beaconThreeCoordinateY * beaconThreeCoordinateY) + (beaconOneCoordinateY * beaconOneCoordinateY);
         
-        NSLog(@"Delta= %f", Delta);
-        NSLog(@"Alpha = %f", Alpha);
-        NSLog(@"Beta = %f", Beta);
         
         
         // Eigentliche Rechnung

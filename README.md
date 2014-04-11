@@ -35,5 +35,5 @@ Result:
 x = 10 
 y = 5 
 
-![My image](n00d13.github.com/IndoorGPS/img/triee.gif)
+![My image](https://github.com/N00D13/IndoorGPS/blob/master/img/trieee.gif?raw=true)
 

@@ -37,19 +37,17 @@
 {
     [super viewDidLoad];
 	
-    //Animation (Test Ball)//
+    //Animation (Test Ball)
     UIImage *ballImage = [UIImage imageNamed:@"positionPoint.png"];
     self.ball = [[UIImageView alloc] initWithImage:ballImage];
     [self.view addSubview:self.ball];
     
-    //Animation (Test Ball)//
     
     
     ///////////Beacon /////////////
     self.beaconDictionary     =   [NSMutableDictionary dictionary];
     
     
-    /////////////////////////////////////////////////////////////
     // setup Estimote beacon manager
     
     // craete manager instance

@@ -1,7 +1,10 @@
 IndoorGPS
 =========
 
-via Estimote Beacons, Position Calculating
+via Estimote Beacons, Position Calculating.
+But i have one Problem, the signal from Estimote Beacons are to low and crab!
+
+Feel free and Program a IndoorGPS System with Wifi or what ever!
 
 Logic
 =========

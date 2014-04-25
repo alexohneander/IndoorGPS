@@ -31,8 +31,10 @@ Solution:
 x0 = (1/delta) * (2*A*(y1-y3)-2*B*(y1-y2)) 
 y0 = (1/delta) * (2*B*(x1-x2)-2*A*(x1-x3)) 
 
-delta = 4*((x1-x2)*(y1-y3)-(x1-x3)*(y1-y2)) 
+delta = 4*((x1-x2)*(y1-y3)-(x1-x3)*(y1-y2))
+
 A = r2²-r1²-x2²+x1²-y2²+y1² 
+
 B = r3²-r1²-x3²+x1²-y3²+y1² 
 
 Result: 

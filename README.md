@@ -1,7 +1,7 @@
 IndoorGPS
 =========
 
-via Estimote Beacons, Position Calculating.
+Position Calculating with Trilateration via Bluetooth Beacons(Estimote).
 
 But i have one Problem, the signal from Estimote Beacons are to low and crab!
 

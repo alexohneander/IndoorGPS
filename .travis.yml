@@ -1,3 +1,3 @@
 language: objective-c
 xcode_project: IndoorGPS.xcodeproj # path to your xcodeproj folder
-xcode_scheme: IndoorGPSTests
+xcode_scheme: IndoorGPS

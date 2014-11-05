@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CD3A58B318BDF01300D33E1F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD3A58B218BDF01300D33E1F /* QuartzCore.framework */; };
-		CDDAC2C3189F9706002298E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2C2189F9706002298E6 /* Foundation.framework */; };
 		CDDAC2C5189F9706002298E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2C4189F9706002298E6 /* CoreGraphics.framework */; };
-		CDDAC2C7189F9706002298E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2C6189F9706002298E6 /* UIKit.framework */; };
 		CDDAC2CD189F9706002298E6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CDDAC2CB189F9706002298E6 /* InfoPlist.strings */; };
 		CDDAC2CF189F9706002298E6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDAC2CE189F9706002298E6 /* main.m */; };
 		CDDAC2D3189F9706002298E6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CDDAC2D2189F9706002298E6 /* AppDelegate.m */; };
@@ -24,7 +22,6 @@
 		CDDAC2F9189F9725002298E6 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F2189F9725002298E6 /* CoreLocation.framework */; };
 		CDDAC2FA189F9725002298E6 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F3189F9725002298E6 /* SystemConfiguration.framework */; };
 		CDDAC2FB189F9725002298E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F4189F9725002298E6 /* Foundation.framework */; };
-		CDDAC2FC189F9725002298E6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F5189F9725002298E6 /* CoreGraphics.framework */; };
 		CDDAC2FD189F9725002298E6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F6189F9725002298E6 /* UIKit.framework */; };
 		CDDAC2FE189F9725002298E6 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDDAC2F7189F9725002298E6 /* XCTest.framework */; };
 		CDDAC305189F9752002298E6 /* Documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = CDDAC300189F9752002298E6 /* Documentation.html */; };
@@ -100,13 +97,10 @@
 				CDDAC2C5189F9706002298E6 /* CoreGraphics.framework in Frameworks */,
 				CDDAC2FD189F9725002298E6 /* UIKit.framework in Frameworks */,
 				CDDAC2F9189F9725002298E6 /* CoreLocation.framework in Frameworks */,
-				CDDAC2C7189F9706002298E6 /* UIKit.framework in Frameworks */,
 				CDDAC2F8189F9725002298E6 /* CoreBluetooth.framework in Frameworks */,
-				CDDAC2FC189F9725002298E6 /* CoreGraphics.framework in Frameworks */,
 				CDDAC2FA189F9725002298E6 /* SystemConfiguration.framework in Frameworks */,
 				CDDAC2FE189F9725002298E6 /* XCTest.framework in Frameworks */,
 				CDDAC2FB189F9725002298E6 /* Foundation.framework in Frameworks */,
-				CDDAC2C3189F9706002298E6 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,7 +279,7 @@
 		CDDAC2B7189F9706002298E6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Alex Wellnitz";
 				TargetAttributes = {
 					CDDAC2BE189F9706002298E6 = {
@@ -393,7 +387,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -408,6 +401,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -433,7 +427,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -477,12 +470,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IndoorGPS/IndoorGPS-Prefix.pch";
 				INFOPLIST_FILE = "IndoorGPS/IndoorGPS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/MyMac/Documents/IOS\\ Programmierung/OpenDoor/EstimoteSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D66EC5AF-7B2D-46E1-90DE-9AF7CFFA16EF";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -493,8 +487,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -502,12 +495,13 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IndoorGPS/IndoorGPS-Prefix.pch";
 				INFOPLIST_FILE = "IndoorGPS/IndoorGPS-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"/Users/MyMac/Documents/IOS\\ Programmierung/OpenDoor/EstimoteSDK",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "D66EC5AF-7B2D-46E1-90DE-9AF7CFFA16EF";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
@@ -516,7 +510,6 @@
 		CDDAC2EF189F9707002298E6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IndoorGPS.app/IndoorGPS";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -539,7 +532,6 @@
 		CDDAC2F0189F9707002298E6 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/IndoorGPS.app/IndoorGPS";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",

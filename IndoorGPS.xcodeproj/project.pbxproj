@@ -48,6 +48,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C50422731A0A15B50027B2A8 /* .travis.yml */ = {isa = PBXFileReference; lastKnownFileType = text; path = .travis.yml; sourceTree = SOURCE_ROOT; };
 		CD3A58B218BDF01300D33E1F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		CDDAC2BF189F9706002298E6 /* IndoorGPS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IndoorGPS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDDAC2C2189F9706002298E6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -168,6 +169,7 @@
 		CDDAC2C8189F9706002298E6 /* IndoorGPS */ = {
 			isa = PBXGroup;
 			children = (
+				C50422731A0A15B50027B2A8 /* .travis.yml */,
 				CDDAC2D1189F9706002298E6 /* AppDelegate.h */,
 				CDDAC2D2189F9706002298E6 /* AppDelegate.m */,
 				CDDAC2D4189F9706002298E6 /* Images.xcassets */,

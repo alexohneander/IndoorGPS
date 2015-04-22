@@ -44,3 +44,7 @@ y = 5
 ![My image](https://github.com/N00D13/IndoorGPS/blob/master/img/trieee.gif?raw=true)
 
 
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/N00D13/indoorgps/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
